@@ -108,6 +108,7 @@ CustomNavigationBar(
 Check example app for more details.
 
 ### Future Plans
+- [ ] Make it more like native navigation bar in Flutter.
 - [ ] Better documentation
 - [ ] Code format
 - [ ] More customizations!!
