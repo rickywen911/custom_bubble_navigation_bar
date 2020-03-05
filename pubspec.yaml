@@ -2,7 +2,7 @@ name: custom_navigation_bar
 description: A custom navigation bar with bubble click effect.
 version: 0.1.0
 author: Ricky Wen<chaoxiangwen@gmail.com>
-homepage:
+homepage: https://github.com/rickywen911/custom_bubble_navigation_bar
 
 environment:
   sdk: ">=2.3.0 <3.0.0"

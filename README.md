@@ -15,7 +15,11 @@ Implemented:
 <img src=screenshot.gif>
 
 ## How to install
-
+Add this to your package's pubspec.yaml file:
+```yaml
+dependencies:
+  custom_navigation_bar: ^0.1.0
+```
 ## Documentation
 You can customize these attributes in the navigation bar.
 ```dart
