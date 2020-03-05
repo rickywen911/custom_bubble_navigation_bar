@@ -18,7 +18,6 @@
 import 'package:flutter/material.dart';
 
 class CustomNavigationBarItem {
-
   /// Create a Custom Navigationbar Item.
   ///
   /// the [selectedIcon] must not be null.
@@ -41,7 +40,6 @@ class CustomNavigationBarItem {
   /// If this icon is not provided, the bottom navigation bar will display
   /// [icon] in either state.
   final IconData selectedIcon;
-
 
   ///
   /// The title string when item is selected.
