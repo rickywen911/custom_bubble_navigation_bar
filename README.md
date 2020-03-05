@@ -18,7 +18,7 @@ Implemented:
 Add this to your package's pubspec.yaml file:
 ```yaml
 dependencies:
-  custom_navigation_bar: ^0.1.0
+  custom_navigation_bar: ^0.1.1
 ```
 ## Documentation
 You can customize these attributes in the navigation bar.
