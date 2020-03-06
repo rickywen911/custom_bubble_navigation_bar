@@ -50,7 +50,6 @@ class CustomNavigationBar extends StatefulWidget {
   /// default is 0.2.
   final double scaleFactor;
 
-
   /// The z-coordinate of this [CustomNavigationBar].
   ///
   /// If null, defaults to `8.0`.
@@ -205,7 +204,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar>
         height: DefaultCustomNavigationBarStyle.defaultHeight +
             additionalBottomPadding,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             for (var i = 0; i < widget.items.length; i++)
               CustomPaint(

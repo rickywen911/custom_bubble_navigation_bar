@@ -1,6 +1,9 @@
 # custom_navigation_bar
 
-A custom navigation bar with bubble click effect.
+A custom navigation bar with bubble click effect.<br>
+
+[![pub package](https://img.shields.io/pub/v/custom_navigation_bar)](https://pub.dev/packages/custom_navigation_bar) 
+[![License: MIT](https://img.shields.io/badge/license-MIT-purple.svg)](https://opensource.org/licenses/MIT)
 
 ## Overview
 
@@ -69,7 +72,7 @@ Check example app for more details.
 
 ### Future Plans
 - [x] Code format
-- [ ] Make it more like native navigation bar in Flutter.
+- [x] Make it more like native navigation bar in Flutter.
 - [ ] Better documentation
 - [ ] More customizations!!
 - [ ] Support Flame widget maybe?<br>
