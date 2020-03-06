@@ -11,11 +11,11 @@ This project is inspired by this [post from Dribbble](https://dribbble.com/shots
 
 This package gives you a cute bubble effect when you click on the navigation bar.
 
-Dribbble:
-<img src="https://cdn.dribbble.com/users/2114584/screenshots/7134849/media/96e4a6002a476bad7bd809ac71e28698.gif">
+Dribbble:<br>
+<img src="https://cdn.dribbble.com/users/2114584/screenshots/7134849/media/96e4a6002a476bad7bd809ac71e28698.gif" width="400">
 
 Implemented:<br>
-<img src=https://raw.githubusercontent.com/rickywen911/custom_bubble_navigation_bar/master/screenshot.gif>
+<img src="https://raw.githubusercontent.com/rickywen911/custom_bubble_navigation_bar/master/screenshot.gif" width="300">
 
 ## How to install
 Add this to your package's pubspec.yaml file:

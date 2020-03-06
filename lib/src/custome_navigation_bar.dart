@@ -186,7 +186,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar>
     Tween<double>(begin: 0.0, end: 1.0).animate(_scaleAnimation)
       ..addListener(() {
         setState(() {
-          _sizes[index] = _scaleAnimation.value * 0.2;
+          _sizes[index] = _scaleAnimation.value * widget.scaleFactor;
         });
       });
     _scaleController.forward();
@@ -242,7 +242,7 @@ class _CustomNavigationBarTile extends StatelessWidget {
     this.item,
     this.selectedColor,
     this.unSelectedColor,
-    this.scale = 1.0,
+    this.scale,
     this.iconSize,
   }) : super(key: key);
 
