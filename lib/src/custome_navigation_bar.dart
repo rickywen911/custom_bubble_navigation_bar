@@ -28,25 +28,33 @@ class CustomNavigationBar extends StatefulWidget {
   const CustomNavigationBar({
     Key key,
     @required this.items,
-    this.height,
     this.selectedColor,
     this.unSelectedColor,
     this.onTap,
     this.currentIndex = 0,
     this.iconSize = 24.0,
+    this.scaleFactor = 0.2,
+    this.elevation = 8.0,
     this.backgroundColor = Colors.white,
     this.strokeColor = Colors.blueAccent,
     this.bubbleCurve = Curves.linear,
     this.scaleCurve = Curves.linear,
   })  : assert(items != null),
+        assert(scaleFactor <= 0.5, 'Scale factor must smaller than 0.5'),
+        assert(scaleFactor > 0, 'Scale factor must bigger than 0'),
+        assert(0 <= currentIndex && currentIndex < items.length),
         super(key: key);
 
   ///
-  /// height of the [CustomNavigationBar].
+  /// scale factor for the icon scale animation effect.
+  /// default is 0.2.
+  final double scaleFactor;
+
+
+  /// The z-coordinate of this [CustomNavigationBar].
   ///
-  /// use [defaultHeight] in [DefaultCustomNavigationBarStyle] when height is null.
-  ///
-  final double height;
+  /// If null, defaults to `8.0`.
+  final double elevation;
 
   ///
   /// Item data in [CustomNavigationBarItem]
@@ -190,36 +198,38 @@ class _CustomNavigationBarState extends State<CustomNavigationBar>
     final double additionalBottomPadding =
         math.max(MediaQuery.of(context).padding.bottom, 0.0);
 
-    return Container(
-      color: widget.backgroundColor,
-      height: widget.height ??
-          DefaultCustomNavigationBarStyle.defaultHeight +
-              additionalBottomPadding,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          for (var i = 0; i < widget.items.length; i++)
-            CustomPaint(
-              painter: BeaconPainter(
-                color: widget.strokeColor,
-                beaconRadius: _radiuses[i],
-                maxRadius: _maxRadius,
+    return Material(
+      elevation: widget.elevation,
+      child: Container(
+        color: widget.backgroundColor,
+        height: DefaultCustomNavigationBarStyle.defaultHeight +
+            additionalBottomPadding,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            for (var i = 0; i < widget.items.length; i++)
+              CustomPaint(
+                painter: BeaconPainter(
+                  color: widget.strokeColor,
+                  beaconRadius: _radiuses[i],
+                  maxRadius: _maxRadius,
+                ),
+                child: _CustomNavigationBarTile(
+                  iconSize: widget.iconSize,
+                  scale: _sizes[i],
+                  onPressed: () {
+                    widget.onTap(i);
+                  },
+                  selected: i == widget.currentIndex,
+                  item: widget.items[i],
+                  selectedColor: widget.selectedColor ??
+                      DefaultCustomNavigationBarStyle.defaultColor,
+                  unSelectedColor: widget.unSelectedColor ??
+                      DefaultCustomNavigationBarStyle.defaultUnselectedColor,
+                ),
               ),
-              child: _CustomNavigationBarTile(
-                iconSize: widget.iconSize,
-                scale: _sizes[i],
-                onPressed: () {
-                  widget.onTap(i);
-                },
-                selected: i == widget.currentIndex,
-                item: widget.items[i],
-                selectedColor: widget.selectedColor ??
-                    DefaultCustomNavigationBarStyle.defaultColor,
-                unSelectedColor: widget.unSelectedColor ??
-                    DefaultCustomNavigationBarStyle.defaultUnselectedColor,
-              ),
-            ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -11,77 +11,33 @@ This package gives you a cute bubble effect when you click on the navigation bar
 Dribbble:
 <img src="https://cdn.dribbble.com/users/2114584/screenshots/7134849/media/96e4a6002a476bad7bd809ac71e28698.gif">
 
-Implemented:
+Implemented:<br>
 <img src=screenshot.gif>
 
 ## How to install
 Add this to your package's pubspec.yaml file:
 ```yaml
 dependencies:
-  custom_navigation_bar: ^0.1.1
+  custom_navigation_bar: ^0.2.0
 ```
 ## Documentation
 You can customize these attributes in the navigation bar.
-```dart
-   ///
-  /// height of the [CustomNavigationBar].
-  ///
-  /// use [defaultHeight] in [DefaultCustomNavigationBarStyle] when height is null.
-  ///
-  final double height;
+| Attributes| Type | Description | Default |  
+|--------|--------|---------------|---------------|
+| ```scaleFactor``` |```double```| scale factor for the icon scale animation. | 0.2 |
+| ```elevation```   |```double```| The z-coordinate of this CustomNavigationBar | 8.0 |
+| ```items```   |```List```| item data in CustomNavigationBar  | required |
+| ```selectedColor```   |```Color```| [Color] when [CustomNavigationBarItem] is selected  | [blueAccent] |
+| ```unSelectedColor```   |```Color```| [Color] when [CustomNavigationBarItem] is not selected.  | grey[600] |
+| ```onTap```  |```Function(int)```| callback function when item tapped | null |
+| ```currentIndex```  |```int```| current index of navigation bar. | 0 |
+| ```iconSize```  |```double```| size of icon. also represent the max radius of bubble effect animation. | 24.0 |
+| ```backgroundColor```  |```Color```| Background color of [CustomNavigationBar] | Colors.white |
+| ```strokeColor```  |```Color```| stroke color | blueAccent |
+| ```bubbleCurve```  |```Curve```| animation curve of bubble effect | linear |
+| ```scaleCurve```  |```Curve```| animation curve of scale effect | linear |
+|
 
-  ///
-  /// Item data in [CustomNavigationBarItem]
-  ///
-  final List<CustomNavigationBarItem> items;
-
-  ///
-  /// [Color] when [CustomNavigationBarItem] is selected.
-  ///
-  /// default color is [blueAccent].
-  final Color selectedColor;
-
-  ///
-  /// [Color] when [CustomNavigationBarItem] is not selected.
-  ///
-  /// default color is [grey[600]].
-  final Color unSelectedColor;
-
-  ///
-  /// callback function when item tapped
-  ///
-  final Function(int) onTap;
-
-  ///
-  /// current index of navigation bar.
-  ///
-  final int currentIndex;
-
-  ///
-  /// size of icon.
-  /// also represent the max radius of bubble effect animation.
-  final double iconSize;
-
-  ///
-  /// Background color of [CustomNavigationBar]
-  ///
-  final Color backgroundColor;
-
-  ///
-  /// stroke color.
-  /// default is [Colors.blueAccent].
-  final Color strokeColor;
-
-  ///
-  /// animation curve of bubble effect
-  ///
-  final Curve bubbleCurve;
-
-  ///
-  /// animation curve of scale effect
-  ///
-  final Curve scaleCurve;
-```
 
 And for customize icon in the navigation bar, just put the icons you want in the ```CustomNavigationBarItem``` like this.
 ```dart
@@ -112,9 +68,9 @@ CustomNavigationBar(
 Check example app for more details.
 
 ### Future Plans
+- [x] Code format
 - [ ] Make it more like native navigation bar in Flutter.
 - [ ] Better documentation
-- [ ] Code format
 - [ ] More customizations!!
-- [ ] Support Flame widget maybe?
+- [ ] Support Flame widget maybe?<br>
 And more...
