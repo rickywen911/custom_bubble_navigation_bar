@@ -1,3 +1,7 @@
+## [0.2.4] - 2020-03-05.
+
+* fix minor bugs.
+
 ## [0.2.3] - 2020-03-05.
 
 * fix documentation.
