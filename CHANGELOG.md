@@ -1,4 +1,12 @@
-## [0.2.0] - 2020-03-04.
+## [0.2.3] - 2020-03-05.
+
+* fix documentation.
+
+## [0.2.1] - 2020-03-05.
+
+* Change item aligment type.
+
+## [0.2.0] - 2020-03-05.
 
 * Remove height property in CustomNavigationBar. 
 * Custom scale factor for icon scale animation.

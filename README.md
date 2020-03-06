@@ -15,31 +15,32 @@ Dribbble:
 <img src="https://cdn.dribbble.com/users/2114584/screenshots/7134849/media/96e4a6002a476bad7bd809ac71e28698.gif">
 
 Implemented:<br>
-<img src=screenshot.gif>
+<img src=https://raw.githubusercontent.com/rickywen911/custom_bubble_navigation_bar/master/screenshot.gif>
 
 ## How to install
 Add this to your package's pubspec.yaml file:
 ```yaml
 dependencies:
-  custom_navigation_bar: ^0.2.1
+  custom_navigation_bar: ^0.2.3
 ```
 ## Documentation
-You can customize these attributes in the navigation bar.
-| Attributes| Type | Description | Default |  
-|--------|--------|---------------|---------------|
-| ```scaleFactor``` |```double```| scale factor for the icon scale animation. | 0.2 |
-| ```elevation```   |```double```| The z-coordinate of this CustomNavigationBar | 8.0 |
-| ```items```   |```List```| item data in CustomNavigationBar  | required |
-| ```selectedColor```   |```Color```| [Color] when [CustomNavigationBarItem] is selected  | [blueAccent] |
-| ```unSelectedColor```   |```Color```| [Color] when [CustomNavigationBarItem] is not selected.  | grey[600] |
-| ```onTap```  |```Function(int)```| callback function when item tapped | null |
-| ```currentIndex```  |```int```| current index of navigation bar. | 0 |
-| ```iconSize```  |```double```| size of icon. also represent the max radius of bubble effect animation. | 24.0 |
-| ```backgroundColor```  |```Color```| Background color of [CustomNavigationBar] | Colors.white |
-| ```strokeColor```  |```Color```| stroke color | blueAccent |
-| ```bubbleCurve```  |```Curve```| animation curve of bubble effect | linear |
-| ```scaleCurve```  |```Curve```| animation curve of scale effect | linear |
-|
+You can customize these attributes in the navigation bar.<br>
+
+| Attributes | Type | Description | Default |
+| -------------------- | -------------- | ---------------- | --------------- |
+|    `scaleFactor` | `double`   | scale factor for the icon scale animation. | 0.2 |
+| `elevation`   | `double` | The z-coordinate of this CustomNavigationBar | 8.0 |
+| `items`   | `List` | item data in CustomNavigationBar  | required |
+| `selectedColor`   | `Color` | [Color] when [CustomNavigationBarItem] is selected  | [blueAccent] |
+| `unSelectedColor`   | `Color` | [Color] when [CustomNavigationBarItem] is not selected.  | grey[600] |
+| `onTap`  | `Function(int)` | callback function when item tapped | null |
+| `currentIndex`  | `int` | current index of navigation bar. | 0 |
+| `iconSize`  | `double` | size of icon. also represent the max radius of bubble effect animation. | 24.0 |
+| `backgroundColor`  | `Color` | Background color of [CustomNavigationBar] | Colors.white |
+| `strokeColor`  | `Color` | stroke color | blueAccent |
+| `bubbleCurve`  | `Curve` | animation curve of bubble effect | linear |
+| `scaleCurve`  | `Curve` | animation curve of scale effect | linear |
+
 
 
 And for customize icon in the navigation bar, just put the icons you want in the ```CustomNavigationBarItem``` like this.
