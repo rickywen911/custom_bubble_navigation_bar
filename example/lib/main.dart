@@ -70,6 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
             _buildLightDesign(),
             _buildNoElevation(),
             _buildCustomIconDesign(),
+            _buildBorderRadiusDesign(),
           ],
         ),
       ),
@@ -87,6 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
           height: 8.0,
         ),
         CustomNavigationBar(
+          scaleFactor: 0.1,
           iconSize: 30.0,
           selectedColor: Colors.white,
           strokeColor: Colors.white,
@@ -136,7 +138,7 @@ class _MyHomePageState extends State<MyHomePage> {
         CustomNavigationBar(
           iconSize: 30.0,
           selectedColor: Color(0xff040307),
-          strokeColor: Color(0x90040307),
+          strokeColor: Color(0x30040307),
           unSelectedColor: Color(0xffacacac),
           backgroundColor: Colors.white,
           items: [
@@ -231,9 +233,57 @@ class _MyHomePageState extends State<MyHomePage> {
         CustomNavigationBar(
           iconSize: 30.0,
           selectedColor: Color(0xff0c18fb),
-          strokeColor: Colors.grey[200],
+          strokeColor: Color(0x300c18fb),
           unSelectedColor: Colors.grey[600],
           backgroundColor: Colors.white,
+          items: [
+            CustomNavigationBarItem(
+              icon: AntDesign.getIconData('home'),
+            ),
+            CustomNavigationBarItem(
+              icon: AntDesign.getIconData('shoppingcart'),
+            ),
+            CustomNavigationBarItem(
+              icon: AntDesign.getIconData("cloudo"),
+            ),
+            CustomNavigationBarItem(
+              icon: AntDesign.getIconData('search1'),
+            ),
+            CustomNavigationBarItem(
+              icon: AntDesign.getIconData("user"),
+            ),
+          ],
+          currentIndex: _currentIndex,
+          onTap: (index) {
+            setState(() {
+              _currentIndex = index;
+            });
+          },
+        ),
+        SizedBox(
+          height: 8.0,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildBorderRadiusDesign() {
+    return Column(
+      children: <Widget>[
+        SizedBox(
+          height: 8.0,
+        ),
+        Text('Navigation Bar with border radius'),
+        SizedBox(
+          height: 8.0,
+        ),
+        CustomNavigationBar(
+          iconSize: 30.0,
+          selectedColor: Color(0xff0c18fb),
+          strokeColor: Color(0x300c18fb),
+          unSelectedColor: Colors.grey[600],
+          backgroundColor: Colors.white,
+          borderRadius: Radius.circular(20.0),
           items: [
             CustomNavigationBarItem(
               icon: AntDesign.getIconData('home'),

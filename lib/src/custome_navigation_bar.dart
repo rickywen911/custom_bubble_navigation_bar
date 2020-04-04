@@ -15,6 +15,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import 'dart:ui';
+
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:custom_navigation_bar/src/animation/beacon_painter.dart';
 import 'package:flutter/material.dart';
@@ -35,6 +37,7 @@ class CustomNavigationBar extends StatefulWidget {
     this.iconSize = 24.0,
     this.scaleFactor = 0.2,
     this.elevation = 8.0,
+    this.borderRadius = Radius.zero,
     this.backgroundColor = Colors.white,
     this.strokeColor = Colors.blueAccent,
     this.bubbleCurve = Curves.linear,
@@ -49,6 +52,12 @@ class CustomNavigationBar extends StatefulWidget {
   /// scale factor for the icon scale animation effect.
   /// default is 0.2.
   final double scaleFactor;
+
+
+  ///
+  /// Border radius for naviagtion bar
+  ///
+  final Radius borderRadius;
 
   /// The z-coordinate of this [CustomNavigationBar].
   ///
@@ -199,10 +208,19 @@ class _CustomNavigationBarState extends State<CustomNavigationBar>
 
     return Material(
       elevation: widget.elevation,
+      borderRadius: BorderRadius.all(
+        widget.borderRadius,
+      ),
       child: Container(
-        color: widget.backgroundColor,
+        decoration: BoxDecoration(
+          color: widget.backgroundColor,
+          borderRadius: BorderRadius.all(
+            widget.borderRadius,
+          ),
+        ),
         height: DefaultCustomNavigationBarStyle.defaultHeight +
             additionalBottomPadding,
+        width: MediaQuery.of(context).size.width,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[

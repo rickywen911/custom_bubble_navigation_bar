@@ -21,7 +21,7 @@ Implemented:<br>
 Add this to your package's pubspec.yaml file:
 ```yaml
 dependencies:
-  custom_navigation_bar: ^0.2.4
+  custom_navigation_bar: ^0.2.5
 ```
 ## Documentation
 You can customize these attributes in the navigation bar.<br>
@@ -40,6 +40,7 @@ You can customize these attributes in the navigation bar.<br>
 | `strokeColor`  | `Color` | stroke color | blueAccent |
 | `bubbleCurve`  | `Curve` | animation curve of bubble effect | linear |
 | `scaleCurve`  | `Curve` | animation curve of scale effect | linear |
+| `borderRadius`  | `Radius` | border radius of navigation bar | Radius.zero |
 
 
 
@@ -74,7 +75,7 @@ Check example app for more details.
 ### Future Plans
 - [x] Code format
 - [x] Make it more like native navigation bar in Flutter.
-- [ ] Better documentation
+- [x] Better documentation
 - [ ] More customizations!!
 - [ ] Support Flame widget maybe?<br>
 And more...
