@@ -1,8 +1,8 @@
 ## [0.2.6] - 2020-04-13.
-* Fix issue[2](https://github.com/rickywen911/custom_bubble_navigation_bar/issues/2)
+* Fix issue[#2](https://github.com/rickywen911/custom_bubble_navigation_bar/issues/2)
 
 ## [0.2.5] - 2020-03-05.
-* Add support for border radius [1](https://github.com/rickywen911/custom_bubble_navigation_bar/issues/1)
+* Add support for border radius [#1](https://github.com/rickywen911/custom_bubble_navigation_bar/issues/1)
 
 ## [0.2.4] - 2020-03-05.
 
