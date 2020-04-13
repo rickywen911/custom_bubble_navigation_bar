@@ -53,7 +53,6 @@ class CustomNavigationBar extends StatefulWidget {
   /// default is 0.2.
   final double scaleFactor;
 
-
   ///
   /// Border radius for naviagtion bar
   ///
@@ -146,7 +145,9 @@ class _CustomNavigationBarState extends State<CustomNavigationBar>
 
   @override
   void dispose() {
-    _controller.dispose();
+    if (_controller != null) {
+      _controller.dispose();
+    }
     super.dispose();
   }
 
