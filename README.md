@@ -21,7 +21,7 @@ Implemented:<br>
 Add this to your package's pubspec.yaml file:
 ```yaml
 dependencies:
-  custom_navigation_bar: ^0.2.6
+  custom_navigation_bar: ^0.2.7
 ```
 ## Documentation
 You can customize these attributes in the navigation bar.<br>
@@ -77,5 +77,4 @@ Check example app for more details.
 - [x] Make it more like native navigation bar in Flutter.
 - [x] Better documentation
 - [ ] More customizations!!
-- [ ] Support Flame widget maybe?<br>
 And more...

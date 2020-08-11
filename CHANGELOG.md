@@ -1,3 +1,7 @@
+
+## [0.2.7] - 2020-08-11.
+* Pump Flutter version to 1.20.0
+
 ## [0.2.6] - 2020-04-13.
 * Fix issue[#2](https://github.com/rickywen911/custom_bubble_navigation_bar/issues/2)
 
