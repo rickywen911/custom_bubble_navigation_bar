@@ -21,6 +21,15 @@ import 'package:flutter_icons/flutter_icons.dart';
 
 void main() => runApp(MyApp());
 
+enum ThemeStyle {
+  Dribbble,
+  Light,
+  NoElevation,
+  AntDesign,
+  BorderRadius,
+  FloatingBar
+}
+
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
@@ -46,272 +55,317 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _currentIndex = 0;
+  ThemeStyle _currentStyle = ThemeStyle.Dribbble;
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
+      // extendBody for floating bar get better perfomance
+      extendBody: true,
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
       body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
         child: ListView(
           children: <Widget>[
-            _buildOriginDesign(),
-            _buildLightDesign(),
-            _buildNoElevation(),
-            _buildCustomIconDesign(),
-            _buildBorderRadiusDesign(),
+            ListTile(
+              title: const Text('Dribbble'),
+              leading: Radio(
+                value: ThemeStyle.Dribbble,
+                groupValue: _currentStyle,
+                onChanged: (ThemeStyle value) {
+                  setState(() {
+                    _currentStyle = value;
+                  });
+                },
+              ),
+            ),
+            ListTile(
+              title: const Text('Light'),
+              leading: Radio(
+                value: ThemeStyle.Light,
+                groupValue: _currentStyle,
+                onChanged: (ThemeStyle value) {
+                  setState(() {
+                    _currentStyle = value;
+                  });
+                },
+              ),
+            ),
+            ListTile(
+              title: const Text('No elevation'),
+              leading: Radio(
+                value: ThemeStyle.NoElevation,
+                groupValue: _currentStyle,
+                onChanged: (ThemeStyle value) {
+                  setState(() {
+                    _currentStyle = value;
+                  });
+                },
+              ),
+            ),
+            ListTile(
+              title: const Text('Custom Icon from Ant Design'),
+              leading: Radio(
+                value: ThemeStyle.AntDesign,
+                groupValue: _currentStyle,
+                onChanged: (ThemeStyle value) {
+                  setState(() {
+                    _currentStyle = value;
+                  });
+                },
+              ),
+            ),
+            ListTile(
+              title: const Text('With border radius'),
+              leading: Radio(
+                value: ThemeStyle.BorderRadius,
+                groupValue: _currentStyle,
+                onChanged: (ThemeStyle value) {
+                  setState(() {
+                    _currentStyle = value;
+                  });
+                },
+              ),
+            ),
+            ListTile(
+              title: const Text('Floating Bar'),
+              leading: Radio(
+                value: ThemeStyle.FloatingBar,
+                groupValue: _currentStyle,
+                onChanged: (ThemeStyle value) {
+                  setState(() {
+                    _currentStyle = value;
+                  });
+                },
+              ),
+            ),
           ],
         ),
       ),
+      bottomNavigationBar: _buildBottomNavigationBar(),
     );
   }
 
+  Widget _buildBottomNavigationBar() {
+    switch (_currentStyle) {
+      case ThemeStyle.Dribbble:
+        return _buildOriginDesign();
+      case ThemeStyle.Light:
+        return _buildLightDesign();
+      case ThemeStyle.AntDesign:
+        return _buildCustomIconDesign();
+      case ThemeStyle.BorderRadius:
+        return _buildBorderRadiusDesign();
+      case ThemeStyle.FloatingBar:
+        return _buildFloatingBar();
+      case ThemeStyle.NoElevation:
+        return _buildNoElevation();
+      default:
+        return _buildOriginDesign();
+    }
+  }
+
   Widget _buildOriginDesign() {
-    return Column(
-      children: <Widget>[
-        SizedBox(
-          height: 8.0,
+    return CustomNavigationBar(
+      scaleFactor: 0.1,
+      iconSize: 30.0,
+      selectedColor: Colors.white,
+      strokeColor: Colors.white,
+      unSelectedColor: Color(0xff6c788a),
+      backgroundColor: Color(0xff040307),
+      items: [
+        CustomNavigationBarItem(
+          icon: Icons.home,
         ),
-        Text('Dribbble'),
-        SizedBox(
-          height: 8.0,
+        CustomNavigationBarItem(
+          icon: Icons.shopping_cart,
         ),
-        CustomNavigationBar(
-          scaleFactor: 0.1,
-          iconSize: 30.0,
-          selectedColor: Colors.white,
-          strokeColor: Colors.white,
-          unSelectedColor: Color(0xff6c788a),
-          backgroundColor: Color(0xff040307),
-          items: [
-            CustomNavigationBarItem(
-              icon: Icons.home,
-            ),
-            CustomNavigationBarItem(
-              icon: Icons.shopping_cart,
-            ),
-            CustomNavigationBarItem(
-              icon: Icons.lightbulb_outline,
-            ),
-            CustomNavigationBarItem(
-              icon: Icons.search,
-            ),
-            CustomNavigationBarItem(
-              icon: Icons.account_circle,
-            ),
-          ],
-          currentIndex: _currentIndex,
-          onTap: (index) {
-            setState(() {
-              _currentIndex = index;
-            });
-          },
+        CustomNavigationBarItem(
+          icon: Icons.lightbulb_outline,
         ),
-        SizedBox(
-          height: 8.0,
+        CustomNavigationBarItem(
+          icon: Icons.search,
+        ),
+        CustomNavigationBarItem(
+          icon: Icons.account_circle,
         ),
       ],
+      currentIndex: _currentIndex,
+      onTap: (index) {
+        setState(() {
+          _currentIndex = index;
+        });
+      },
     );
   }
 
   Widget _buildLightDesign() {
-    return Column(
-      children: <Widget>[
-        SizedBox(
-          height: 8.0,
+    return CustomNavigationBar(
+      iconSize: 30.0,
+      selectedColor: Color(0xff040307),
+      strokeColor: Color(0x30040307),
+      unSelectedColor: Color(0xffacacac),
+      backgroundColor: Colors.white,
+      items: [
+        CustomNavigationBarItem(
+          icon: Icons.home,
         ),
-        Text('Light'),
-        SizedBox(
-          height: 8.0,
+        CustomNavigationBarItem(
+          icon: Icons.shopping_cart,
         ),
-        CustomNavigationBar(
-          iconSize: 30.0,
-          selectedColor: Color(0xff040307),
-          strokeColor: Color(0x30040307),
-          unSelectedColor: Color(0xffacacac),
-          backgroundColor: Colors.white,
-          items: [
-            CustomNavigationBarItem(
-              icon: Icons.home,
-            ),
-            CustomNavigationBarItem(
-              icon: Icons.shopping_cart,
-            ),
-            CustomNavigationBarItem(
-              icon: Icons.lightbulb_outline,
-            ),
-            CustomNavigationBarItem(
-              icon: Icons.search,
-            ),
-            CustomNavigationBarItem(
-              icon: Icons.account_circle,
-            ),
-          ],
-          currentIndex: _currentIndex,
-          onTap: (index) {
-            setState(() {
-              _currentIndex = index;
-            });
-          },
+        CustomNavigationBarItem(
+          icon: Icons.lightbulb_outline,
         ),
-        SizedBox(
-          height: 8.0,
+        CustomNavigationBarItem(
+          icon: Icons.search,
+        ),
+        CustomNavigationBarItem(
+          icon: Icons.account_circle,
         ),
       ],
+      currentIndex: _currentIndex,
+      onTap: (index) {
+        setState(() {
+          _currentIndex = index;
+        });
+      },
     );
   }
 
   Widget _buildNoElevation() {
-    return Column(
-      children: <Widget>[
-        SizedBox(
-          height: 8.0,
+    return CustomNavigationBar(
+      elevation: 0.0,
+      iconSize: 30.0,
+      selectedColor: Color(0xff625aff),
+      strokeColor: Color(0xff625aff),
+      unSelectedColor: Colors.white,
+      backgroundColor: Color(0xffa9a5f2),
+      items: [
+        CustomNavigationBarItem(
+          icon: Icons.home,
         ),
-        Text('No elevation'),
-        SizedBox(
-          height: 8.0,
+        CustomNavigationBarItem(
+          icon: Icons.shopping_cart,
         ),
-        CustomNavigationBar(
-          elevation: 0.0,
-          iconSize: 30.0,
-          selectedColor: Color(0xff625aff),
-          strokeColor: Color(0xff625aff),
-          unSelectedColor: Colors.white,
-          backgroundColor: Color(0xffa9a5f2),
-          items: [
-            CustomNavigationBarItem(
-              icon: Icons.home,
-            ),
-            CustomNavigationBarItem(
-              icon: Icons.shopping_cart,
-            ),
-            CustomNavigationBarItem(
-              icon: Icons.lightbulb_outline,
-            ),
-            CustomNavigationBarItem(
-              icon: Icons.search,
-            ),
-            CustomNavigationBarItem(
-              icon: Icons.account_circle,
-            ),
-          ],
-          currentIndex: _currentIndex,
-          onTap: (index) {
-            setState(() {
-              _currentIndex = index;
-            });
-          },
+        CustomNavigationBarItem(
+          icon: Icons.lightbulb_outline,
         ),
-        SizedBox(
-          height: 8.0,
+        CustomNavigationBarItem(
+          icon: Icons.search,
+        ),
+        CustomNavigationBarItem(
+          icon: Icons.account_circle,
         ),
       ],
+      currentIndex: _currentIndex,
+      onTap: (index) {
+        setState(() {
+          _currentIndex = index;
+        });
+      },
     );
   }
 
   Widget _buildCustomIconDesign() {
-    return Column(
-      children: <Widget>[
-        SizedBox(
-          height: 8.0,
+    return CustomNavigationBar(
+      iconSize: 30.0,
+      selectedColor: Color(0xff0c18fb),
+      strokeColor: Color(0x300c18fb),
+      unSelectedColor: Colors.grey[600],
+      backgroundColor: Colors.white,
+      items: [
+        CustomNavigationBarItem(
+          icon: AntDesign.getIconData('home'),
         ),
-        Text('Custom Icon from Ant Design'),
-        SizedBox(
-          height: 8.0,
+        CustomNavigationBarItem(
+          icon: AntDesign.getIconData('shoppingcart'),
         ),
-        CustomNavigationBar(
-          iconSize: 30.0,
-          selectedColor: Color(0xff0c18fb),
-          strokeColor: Color(0x300c18fb),
-          unSelectedColor: Colors.grey[600],
-          backgroundColor: Colors.white,
-          items: [
-            CustomNavigationBarItem(
-              icon: AntDesign.getIconData('home'),
-            ),
-            CustomNavigationBarItem(
-              icon: AntDesign.getIconData('shoppingcart'),
-            ),
-            CustomNavigationBarItem(
-              icon: AntDesign.getIconData("cloudo"),
-            ),
-            CustomNavigationBarItem(
-              icon: AntDesign.getIconData('search1'),
-            ),
-            CustomNavigationBarItem(
-              icon: AntDesign.getIconData("user"),
-            ),
-          ],
-          currentIndex: _currentIndex,
-          onTap: (index) {
-            setState(() {
-              _currentIndex = index;
-            });
-          },
+        CustomNavigationBarItem(
+          icon: AntDesign.getIconData("cloudo"),
         ),
-        SizedBox(
-          height: 8.0,
+        CustomNavigationBarItem(
+          icon: AntDesign.getIconData('search1'),
+        ),
+        CustomNavigationBarItem(
+          icon: AntDesign.getIconData("user"),
         ),
       ],
+      currentIndex: _currentIndex,
+      onTap: (index) {
+        setState(() {
+          _currentIndex = index;
+        });
+      },
     );
   }
 
   Widget _buildBorderRadiusDesign() {
-    return Column(
-      children: <Widget>[
-        SizedBox(
-          height: 8.0,
+    return CustomNavigationBar(
+      iconSize: 30.0,
+      selectedColor: Color(0xff0c18fb),
+      strokeColor: Color(0x300c18fb),
+      unSelectedColor: Colors.grey[600],
+      backgroundColor: Colors.white,
+      borderRadius: Radius.circular(20.0),
+      items: [
+        CustomNavigationBarItem(
+          icon: AntDesign.getIconData('home'),
         ),
-        Text('Navigation Bar with border radius'),
-        SizedBox(
-          height: 8.0,
+        CustomNavigationBarItem(
+          icon: AntDesign.getIconData('shoppingcart'),
         ),
-        CustomNavigationBar(
-          iconSize: 30.0,
-          selectedColor: Color(0xff0c18fb),
-          strokeColor: Color(0x300c18fb),
-          unSelectedColor: Colors.grey[600],
-          backgroundColor: Colors.white,
-          borderRadius: Radius.circular(20.0),
-          items: [
-            CustomNavigationBarItem(
-              icon: AntDesign.getIconData('home'),
-            ),
-            CustomNavigationBarItem(
-              icon: AntDesign.getIconData('shoppingcart'),
-            ),
-            CustomNavigationBarItem(
-              icon: AntDesign.getIconData("cloudo"),
-            ),
-            CustomNavigationBarItem(
-              icon: AntDesign.getIconData('search1'),
-            ),
-            CustomNavigationBarItem(
-              icon: AntDesign.getIconData("user"),
-            ),
-          ],
-          currentIndex: _currentIndex,
-          onTap: (index) {
-            setState(() {
-              _currentIndex = index;
-            });
-          },
+        CustomNavigationBarItem(
+          icon: AntDesign.getIconData("cloudo"),
         ),
-        SizedBox(
-          height: 8.0,
+        CustomNavigationBarItem(
+          icon: AntDesign.getIconData('search1'),
+        ),
+        CustomNavigationBarItem(
+          icon: AntDesign.getIconData("user"),
         ),
       ],
+      currentIndex: _currentIndex,
+      onTap: (index) {
+        setState(() {
+          _currentIndex = index;
+        });
+      },
+    );
+  }
+
+  Widget _buildFloatingBar() {
+    return CustomNavigationBar(
+      iconSize: 30.0,
+      selectedColor: Color(0xff0c18fb),
+      strokeColor: Color(0x300c18fb),
+      unSelectedColor: Colors.grey[600],
+      backgroundColor: Colors.white,
+      borderRadius: Radius.circular(20.0),
+      items: [
+        CustomNavigationBarItem(
+          icon: AntDesign.getIconData('home'),
+        ),
+        CustomNavigationBarItem(
+          icon: AntDesign.getIconData('shoppingcart'),
+        ),
+        CustomNavigationBarItem(
+          icon: AntDesign.getIconData("cloudo"),
+        ),
+        CustomNavigationBarItem(
+          icon: AntDesign.getIconData('search1'),
+        ),
+        CustomNavigationBarItem(
+          icon: AntDesign.getIconData("user"),
+        ),
+      ],
+      currentIndex: _currentIndex,
+      onTap: (index) {
+        setState(() {
+          _currentIndex = index;
+        });
+      },
+      isFloating: true,
     );
   }
 }

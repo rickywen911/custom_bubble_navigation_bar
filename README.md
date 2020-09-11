@@ -17,11 +17,52 @@ Dribbble:<br>
 Implemented:<br>
 <img src="https://raw.githubusercontent.com/rickywen911/custom_bubble_navigation_bar/master/screenshot.gif" width="300">
 
+## Gallery
+
+<div style="text-align: center">
+    <table>
+        <tr>
+            <td style="text-align: center">
+                <a>
+                    <img src="https://raw.githubusercontent.com/rickywen911/custom_bubble_navigation_bar/master/1.png" width="200"/>
+                </a>
+            </td>            
+            <td style="text-align: center">
+                <a>
+                    <img src="https://raw.githubusercontent.com/rickywen911/custom_bubble_navigation_bar/master/2.png" width="200"/>
+                </a>
+            </td>  
+            <td style="text-align: center">
+                <a>
+                    <img src="https://raw.githubusercontent.com/rickywen911/custom_bubble_navigation_bar/master/3.png" width="200"/>
+                </a>
+            </td>  
+        </tr>
+        <tr>
+            <td style="text-align: center">
+                <a>
+                    <img src="https://raw.githubusercontent.com/rickywen911/custom_bubble_navigation_bar/master/4.png" width="200"/>
+                </a>
+            </td>  
+            <td style="text-align: center">
+                <a>
+                    <img src="https://raw.githubusercontent.com/rickywen911/custom_bubble_navigation_bar/master/5.png" width="200"/>
+                </a>
+            </td>  
+            <td style="text-align: center">
+                <a>
+                    <img src="https://raw.githubusercontent.com/rickywen911/custom_bubble_navigation_bar/master/6.png" width="200"/>
+                </a>
+            </td>  
+        </tr>
+    </table>
+</div>
+
 ## How to install
 Add this to your package's pubspec.yaml file:
 ```yaml
 dependencies:
-  custom_navigation_bar: ^0.2.7
+  custom_navigation_bar: ^0.3.0
 ```
 ## Documentation
 You can customize these attributes in the navigation bar.<br>
@@ -41,6 +82,8 @@ You can customize these attributes in the navigation bar.<br>
 | `bubbleCurve`  | `Curve` | animation curve of bubble effect | linear |
 | `scaleCurve`  | `Curve` | animation curve of scale effect | linear |
 | `borderRadius`  | `Radius` | border radius of navigation bar | Radius.zero |
+| `isFloating`  | `bool` | control if CustomNavigationBar is floating | false |
+
 
 
 
@@ -68,6 +111,8 @@ CustomNavigationBar(
         ...
       )
 ```
+
+**Attention**: If you set ```isFloating``` to  ```true```, I would recommand you to set ```extendBody``` to ```true``` in ```Scaffold``` for a better performance.
 
 ## Example
 Check example app for more details.

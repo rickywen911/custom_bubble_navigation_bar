@@ -27,22 +27,23 @@ class CustomNavigationBar extends StatefulWidget {
   ///
   /// create a [CustomNavigationBar]
   ///
-  const CustomNavigationBar({
-    Key key,
-    @required this.items,
-    this.selectedColor,
-    this.unSelectedColor,
-    this.onTap,
-    this.currentIndex = 0,
-    this.iconSize = 24.0,
-    this.scaleFactor = 0.2,
-    this.elevation = 8.0,
-    this.borderRadius = Radius.zero,
-    this.backgroundColor = Colors.white,
-    this.strokeColor = Colors.blueAccent,
-    this.bubbleCurve = Curves.linear,
-    this.scaleCurve = Curves.linear,
-  })  : assert(items != null),
+  const CustomNavigationBar(
+      {Key key,
+      @required this.items,
+      this.selectedColor,
+      this.unSelectedColor,
+      this.onTap,
+      this.currentIndex = 0,
+      this.iconSize = 24.0,
+      this.scaleFactor = 0.2,
+      this.elevation = 8.0,
+      this.borderRadius = Radius.zero,
+      this.backgroundColor = Colors.white,
+      this.strokeColor = Colors.blueAccent,
+      this.bubbleCurve = Curves.linear,
+      this.scaleCurve = Curves.linear,
+      this.isFloating = false})
+      : assert(items != null),
         assert(scaleFactor <= 0.5, 'Scale factor must smaller than 0.5'),
         assert(scaleFactor > 0, 'Scale factor must bigger than 0'),
         assert(0 <= currentIndex && currentIndex < items.length),
@@ -52,6 +53,12 @@ class CustomNavigationBar extends StatefulWidget {
   /// scale factor for the icon scale animation effect.
   /// default is 0.2.
   final double scaleFactor;
+
+  ///
+  /// boolean that control if navigation bar perform floating.
+  /// default is false
+  ///
+  final bool isFloating;
 
   ///
   /// Border radius for naviagtion bar
@@ -206,47 +213,52 @@ class _CustomNavigationBarState extends State<CustomNavigationBar>
   Widget build(BuildContext context) {
     final double additionalBottomPadding =
         math.max(MediaQuery.of(context).padding.bottom, 0.0);
-
-    return Material(
-      elevation: widget.elevation,
-      borderRadius: BorderRadius.all(
-        widget.borderRadius,
-      ),
-      child: Container(
-        decoration: BoxDecoration(
-          color: widget.backgroundColor,
-          borderRadius: BorderRadius.all(
-            widget.borderRadius,
-          ),
+    return Padding(
+      padding: widget.isFloating
+          ? EdgeInsets.only(
+              left: 16, right: 16, top: 0, bottom: additionalBottomPadding)
+          : EdgeInsets.zero,
+      child: Material(
+        elevation: widget.elevation,
+        borderRadius: BorderRadius.all(
+          widget.borderRadius,
         ),
-        height: DefaultCustomNavigationBarStyle.defaultHeight +
-            additionalBottomPadding,
-        width: MediaQuery.of(context).size.width,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            for (var i = 0; i < widget.items.length; i++)
-              CustomPaint(
-                painter: BeaconPainter(
-                  color: widget.strokeColor,
-                  beaconRadius: _radiuses[i],
-                  maxRadius: _maxRadius,
+        child: Container(
+          decoration: BoxDecoration(
+            color: widget.backgroundColor,
+            borderRadius: BorderRadius.all(
+              widget.borderRadius,
+            ),
+          ),
+          height: DefaultCustomNavigationBarStyle.defaultHeight +
+              (widget.isFloating ? 0.0 : additionalBottomPadding),
+          width: MediaQuery.of(context).size.width,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              for (var i = 0; i < widget.items.length; i++)
+                CustomPaint(
+                  painter: BeaconPainter(
+                    color: widget.strokeColor,
+                    beaconRadius: _radiuses[i],
+                    maxRadius: _maxRadius,
+                  ),
+                  child: _CustomNavigationBarTile(
+                    iconSize: widget.iconSize,
+                    scale: _sizes[i],
+                    onPressed: () {
+                      widget.onTap(i);
+                    },
+                    selected: i == widget.currentIndex,
+                    item: widget.items[i],
+                    selectedColor: widget.selectedColor ??
+                        DefaultCustomNavigationBarStyle.defaultColor,
+                    unSelectedColor: widget.unSelectedColor ??
+                        DefaultCustomNavigationBarStyle.defaultUnselectedColor,
+                  ),
                 ),
-                child: _CustomNavigationBarTile(
-                  iconSize: widget.iconSize,
-                  scale: _sizes[i],
-                  onPressed: () {
-                    widget.onTap(i);
-                  },
-                  selected: i == widget.currentIndex,
-                  item: widget.items[i],
-                  selectedColor: widget.selectedColor ??
-                      DefaultCustomNavigationBarStyle.defaultColor,
-                  unSelectedColor: widget.unSelectedColor ??
-                      DefaultCustomNavigationBarStyle.defaultUnselectedColor,
-                ),
-              ),
-          ],
+            ],
+          ),
         ),
       ),
     );
