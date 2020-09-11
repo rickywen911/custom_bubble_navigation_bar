@@ -1,4 +1,8 @@
 
+## [0.3.0] - 2020-09-10.
+* Add floating bar option. (Adding this feature is because I got a hint from the new version of Amazon app)
+* Optimize example.
+
 ## [0.2.7] - 2020-08-11.
 * Pump Flutter version to 1.20.0
 
