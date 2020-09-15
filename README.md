@@ -15,7 +15,7 @@ Dribbble:<br>
 <img src="https://cdn.dribbble.com/users/2114584/screenshots/7134849/media/96e4a6002a476bad7bd809ac71e28698.gif" width="400">
 
 Implemented:<br>
-<img src="https://raw.githubusercontent.com/rickywen911/custom_bubble_navigation_bar/master/screenshot.gif" width="300">
+<img src="https://raw.githubusercontent.com/rickywen911/custom_bubble_navigation_bar/master/screenshot/screenshot.gif" width="300">
 
 ## Gallery
 
@@ -24,34 +24,34 @@ Implemented:<br>
         <tr>
             <td style="text-align: center">
                 <a>
-                    <img src="https://raw.githubusercontent.com/rickywen911/custom_bubble_navigation_bar/master/1.png" width="200"/>
+                    <img src="https://raw.githubusercontent.com/rickywen911/custom_bubble_navigation_bar/master/screenshot/1.png" width="200"/>
                 </a>
             </td>            
             <td style="text-align: center">
                 <a>
-                    <img src="https://raw.githubusercontent.com/rickywen911/custom_bubble_navigation_bar/master/2.png" width="200"/>
+                    <img src="https://raw.githubusercontent.com/rickywen911/custom_bubble_navigation_bar/master/screenshot/2.png" width="200"/>
                 </a>
             </td>  
             <td style="text-align: center">
                 <a>
-                    <img src="https://raw.githubusercontent.com/rickywen911/custom_bubble_navigation_bar/master/3.png" width="200"/>
+                    <img src="https://raw.githubusercontent.com/rickywen911/custom_bubble_navigation_bar/master/screenshot/3.png" width="200"/>
                 </a>
             </td>  
         </tr>
         <tr>
             <td style="text-align: center">
                 <a>
-                    <img src="https://raw.githubusercontent.com/rickywen911/custom_bubble_navigation_bar/master/4.png" width="200"/>
+                    <img src="https://raw.githubusercontent.com/rickywen911/custom_bubble_navigation_bar/master/screenshot/4.png" width="200"/>
                 </a>
             </td>  
             <td style="text-align: center">
                 <a>
-                    <img src="https://raw.githubusercontent.com/rickywen911/custom_bubble_navigation_bar/master/5.png" width="200"/>
+                    <img src="https://raw.githubusercontent.com/rickywen911/custom_bubble_navigation_bar/master/screenshot/5.png" width="200"/>
                 </a>
             </td>  
             <td style="text-align: center">
                 <a>
-                    <img src="https://raw.githubusercontent.com/rickywen911/custom_bubble_navigation_bar/master/6.png" width="200"/>
+                    <img src="https://raw.githubusercontent.com/rickywen911/custom_bubble_navigation_bar/master/screenshot/6.png" width="200"/>
                 </a>
             </td>  
         </tr>
@@ -62,7 +62,7 @@ Implemented:<br>
 Add this to your package's pubspec.yaml file:
 ```yaml
 dependencies:
-  custom_navigation_bar: ^0.3.0
+  custom_navigation_bar: ^0.3.1
 ```
 ## Documentation
 You can customize these attributes in the navigation bar.<br>
