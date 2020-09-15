@@ -1,4 +1,7 @@
 
+## ## [0.3.2] - 2020-09-15.
+* Update screenshots.
+
 ## [0.3.0] - 2020-09-10.
 * Add floating bar option. (Adding this feature is because I got a hint from the new version of Amazon app)
 * Optimize example.
