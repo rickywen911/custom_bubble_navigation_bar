@@ -2,8 +2,10 @@
 
 A custom navigation bar with bubble click effect.<br>
 
+
 [![pub package](https://img.shields.io/pub/v/custom_navigation_bar)](https://pub.dev/packages/custom_navigation_bar) 
 [![License: MIT](https://img.shields.io/badge/license-MIT-purple.svg)](https://opensource.org/licenses/MIT)
+<a href="https://github.com/rickywen911/custom_bubble_navigation_bar"><img src="https://img.shields.io/github/stars/rickywen911/custom_bubble_navigation_bar.svg?style=flat&logo=github&colorB=deeppink&label=stars" alt="Star on Github"></a>
 
 ## Overview
 
@@ -116,6 +118,9 @@ CustomNavigationBar(
 
 ## Example
 Check example app for more details.
+
+## Contribute
+Issues and pull requests are welcomed!!
 
 ### Future Plans
 - [x] Code format
