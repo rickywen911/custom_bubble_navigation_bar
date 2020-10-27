@@ -51,7 +51,7 @@ class CustomNavigationBar extends StatefulWidget {
 
   ///
   /// scale factor for the icon scale animation effect.
-  /// default is 0.2.
+  /// default is `0.2`.
   final double scaleFactor;
 
   ///
@@ -136,6 +136,8 @@ class _CustomNavigationBarState extends State<CustomNavigationBar>
   double _bubbleRadius = 0.0;
   double _maxRadius;
 
+  double _itemPadding = 0.0;
+
   @override
   void initState() {
     super.initState();
@@ -213,6 +215,20 @@ class _CustomNavigationBarState extends State<CustomNavigationBar>
   Widget build(BuildContext context) {
     final double additionalBottomPadding =
         math.max(MediaQuery.of(context).padding.bottom, 0.0);
+
+    final height = DefaultCustomNavigationBarStyle.defaultHeight +
+        (widget.isFloating ? 0.0 : additionalBottomPadding);
+
+    _itemPadding = (MediaQuery.of(context).size.width -
+            widget.items.length * widget.iconSize) /
+        (widget.items.length * 2);
+
+    if (widget.isFloating) {
+      _itemPadding = (MediaQuery.of(context).size.width -
+              widget.items.length * widget.iconSize -
+              32) /
+          (widget.items.length * 2);
+    }
     return Padding(
       padding: widget.isFloating
           ? EdgeInsets.only(
@@ -230,31 +246,39 @@ class _CustomNavigationBarState extends State<CustomNavigationBar>
               widget.borderRadius,
             ),
           ),
-          height: DefaultCustomNavigationBarStyle.defaultHeight +
-              (widget.isFloating ? 0.0 : additionalBottomPadding),
+          height: height,
           width: MediaQuery.of(context).size.width,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               for (var i = 0; i < widget.items.length; i++)
-                CustomPaint(
-                  painter: BeaconPainter(
-                    color: widget.strokeColor,
-                    beaconRadius: _radiuses[i],
-                    maxRadius: _maxRadius,
-                  ),
-                  child: _CustomNavigationBarTile(
-                    iconSize: widget.iconSize,
-                    scale: _sizes[i],
-                    onPressed: () {
-                      widget.onTap(i);
-                    },
-                    selected: i == widget.currentIndex,
-                    item: widget.items[i],
-                    selectedColor: widget.selectedColor ??
-                        DefaultCustomNavigationBarStyle.defaultColor,
-                    unSelectedColor: widget.unSelectedColor ??
-                        DefaultCustomNavigationBarStyle.defaultUnselectedColor,
+                Container(
+                  height: widget.iconSize,
+                  width: widget.iconSize + _itemPadding * 2,
+                  child: CustomPaint(
+                    painter: BeaconPainter(
+                        color: widget.strokeColor,
+                        beaconRadius: _radiuses[i],
+                        maxRadius: _maxRadius,
+                        offset: Offset(
+                          widget.iconSize / 2 + _itemPadding,
+                          widget.iconSize / 2,
+                        )),
+                    child: _CustomNavigationBarTile(
+                      iconSize: widget.iconSize,
+                      scale: _sizes[i],
+                      onPressed: () {
+                        widget.onTap(i);
+                      },
+                      selected: i == widget.currentIndex,
+                      item: widget.items[i],
+                      selectedColor: widget.selectedColor ??
+                          DefaultCustomNavigationBarStyle.defaultColor,
+                      unSelectedColor: widget.unSelectedColor ??
+                          DefaultCustomNavigationBarStyle
+                              .defaultUnselectedColor,
+                      iconPadding: _itemPadding,
+                    ),
                   ),
                 ),
             ],
@@ -266,16 +290,17 @@ class _CustomNavigationBarState extends State<CustomNavigationBar>
 }
 
 class _CustomNavigationBarTile extends StatelessWidget {
-  const _CustomNavigationBarTile({
-    Key key,
-    this.onPressed,
-    this.selected,
-    this.item,
-    this.selectedColor,
-    this.unSelectedColor,
-    this.scale,
-    this.iconSize,
-  }) : super(key: key);
+  const _CustomNavigationBarTile(
+      {Key key,
+      this.onPressed,
+      this.selected,
+      this.item,
+      this.selectedColor,
+      this.unSelectedColor,
+      this.scale,
+      this.iconSize,
+      this.iconPadding})
+      : super(key: key);
 
   final VoidCallback onPressed;
 
@@ -291,17 +316,20 @@ class _CustomNavigationBarTile extends StatelessWidget {
 
   final double iconSize;
 
+  final double iconPadding;
+
   @override
   Widget build(BuildContext context) {
     return Transform.scale(
       scale: 1.0 + scale,
-      child: GestureDetector(
-        child: Icon(
-          item.icon,
-          color: selected ? selectedColor : unSelectedColor,
-          size: iconSize,
+      child: IconButton(
+        padding: EdgeInsets.symmetric(
+          horizontal: iconPadding,
         ),
-        onTap: onPressed,
+        icon: Icon(item.icon),
+        color: selected ? selectedColor : unSelectedColor,
+        iconSize: iconSize,
+        onPressed: onPressed,
       ),
     );
   }
