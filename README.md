@@ -64,7 +64,7 @@ Implemented:<br>
 Add this to your package's pubspec.yaml file:
 ```yaml
 dependencies:
-  custom_navigation_bar: ^0.3.2
+  custom_navigation_bar: ^0.4.0
 ```
 ## Documentation
 You can customize these attributes in the navigation bar.<br>
