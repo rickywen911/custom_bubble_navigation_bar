@@ -64,7 +64,7 @@ Implemented:<br>
 Add this to your package's pubspec.yaml file:
 ```yaml
 dependencies:
-  custom_navigation_bar: ^0.4.0
+  custom_navigation_bar: ^0.5.0
 ```
 ## Documentation
 You can customize these attributes in the navigation bar.<br>
@@ -87,7 +87,7 @@ You can customize these attributes in the navigation bar.<br>
 | `isFloating`  | `bool` | control if CustomNavigationBar is floating | false |
 
 
-
+**Attention**: If you set ```isFloating``` to  ```true```, I would recommand you to set ```extendBody``` to ```true``` in ```Scaffold``` for a better performance.
 
 And for customize icon in the navigation bar, just put the icons you want in the ```CustomNavigationBarItem``` like this.
 ```dart
@@ -114,7 +114,42 @@ CustomNavigationBar(
       )
 ```
 
-**Attention**: If you set ```isFloating``` to  ```true```, I would recommand you to set ```extendBody``` to ```true``` in ```Scaffold``` for a better performance.
+If you want add notification badge, just use like this
+```dart
+CustomNavigationBar(
+        ...
+        items: [
+        CustomNavigationBarItem(
+          icon: Icons.home,
+          badgeCount: _badgeCounts[0],
+          showBadge: _badgeShows[0],
+        ),
+        CustomNavigationBarItem(
+          icon: Icons.shopping_cart,
+          badgeCount: _badgeCounts[1],
+          showBadge: _badgeShows[1],
+        ),
+        CustomNavigationBarItem(
+          icon: Icons.lightbulb_outline,
+          badgeCount: _badgeCounts[2],
+          showBadge: _badgeShows[2],
+        ),
+        CustomNavigationBarItem(
+          icon: Icons.search,
+          badgeCount: _badgeCounts[3],
+          showBadge: _badgeShows[3],
+        ),
+        CustomNavigationBarItem(
+          icon: Icons.account_circle,
+          badgeCount: _badgeCounts[4],
+          showBadge: _badgeShows[4],
+        ),
+      ],
+        ...
+      )
+```
+To clear a badge, set `showBadge` to `false`
+
 
 ## Example
 Check example app for more details.

@@ -21,12 +21,14 @@ class CustomNavigationBarItem {
   /// Create a Custom Navigationbar Item.
   ///
   /// the [selectedIcon] must not be null.
-  const CustomNavigationBarItem({
-    @required this.icon,
-    IconData selectedIcon,
-    this.selectedTitle,
-    this.unSelectedTitle,
-  }) : selectedIcon = selectedIcon ?? icon;
+  CustomNavigationBarItem(
+      {@required this.icon,
+      IconData selectedIcon,
+      this.selectedTitle,
+      this.unSelectedTitle,
+      this.badgeCount = 0,
+      this.showBadge = true})
+      : selectedIcon = selectedIcon ?? icon;
 
   ///
   /// The icon of the item
@@ -52,4 +54,10 @@ class CustomNavigationBarItem {
   ///
   /// Item will only show [icon] when [unSelectedTitle] is null.
   final String unSelectedTitle;
+
+  /// Notification badge count
+  final int badgeCount;
+
+  /// hide or show badge
+  final bool showBadge;
 }
