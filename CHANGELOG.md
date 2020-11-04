@@ -1,9 +1,13 @@
 
-## ## [0.4.0] - 2020-10-26.
+## [0.5.0] - 2020-11-03.
+* Add supporting for notification badge.
+
+
+## [0.4.0] - 2020-10-26.
 * Enhancement[#3](https://github.com/rickywen911/custom_bubble_navigation_bar/issues/5)
 
 
-## ## [0.3.2] - 2020-09-15.
+## [0.3.2] - 2020-09-15.
 * Update screenshots.
 
 ## [0.3.0] - 2020-09-10.

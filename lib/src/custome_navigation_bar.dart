@@ -19,6 +19,7 @@ import 'dart:ui';
 
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:custom_navigation_bar/src/animation/beacon_painter.dart';
+import 'package:custom_navigation_bar/src/util/badge_text.dart';
 import 'package:flutter/material.dart';
 import 'util/default_style.dart';
 import 'dart:math' as math;
@@ -322,14 +323,23 @@ class _CustomNavigationBarTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Transform.scale(
       scale: 1.0 + scale,
-      child: IconButton(
-        padding: EdgeInsets.symmetric(
-          horizontal: iconPadding,
-        ),
-        icon: Icon(item.icon),
-        color: selected ? selectedColor : unSelectedColor,
-        iconSize: iconSize,
-        onPressed: onPressed,
+      child: Stack(
+        children: [
+          IconButton(
+            padding: EdgeInsets.symmetric(
+              horizontal: iconPadding,
+            ),
+            icon: Icon(item.icon),
+            color: selected ? selectedColor : unSelectedColor,
+            iconSize: iconSize,
+            onPressed: onPressed,
+          ),
+          BadgeText(
+            show: item.showBadge,
+            count: item.badgeCount,
+            right: iconPadding,
+          )
+        ],
       ),
     );
   }

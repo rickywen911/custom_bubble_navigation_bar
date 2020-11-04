@@ -27,7 +27,8 @@ enum ThemeStyle {
   NoElevation,
   AntDesign,
   BorderRadius,
-  FloatingBar
+  FloatingBar,
+  NotificationBadge
 }
 
 class MyApp extends StatelessWidget {
@@ -55,7 +56,11 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _currentIndex = 0;
-  ThemeStyle _currentStyle = ThemeStyle.Dribbble;
+  ThemeStyle _currentStyle = ThemeStyle.NotificationBadge;
+
+  List<int> _badgeCounts = List<int>.generate(5, (index) => index);
+
+  List<bool> _badgeShows = List<bool>.generate(5, (index) => true);
 
   @override
   Widget build(BuildContext context) {
@@ -68,6 +73,18 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: ListView(
           children: <Widget>[
+            ListTile(
+              title: const Text('Notification badge'),
+              leading: Radio(
+                value: ThemeStyle.NotificationBadge,
+                groupValue: _currentStyle,
+                onChanged: (ThemeStyle value) {
+                  setState(() {
+                    _currentStyle = value;
+                  });
+                },
+              ),
+            ),
             ListTile(
               title: const Text('Dribbble'),
               leading: Radio(
@@ -161,14 +178,60 @@ class _MyHomePageState extends State<MyHomePage> {
         return _buildFloatingBar();
       case ThemeStyle.NoElevation:
         return _buildNoElevation();
+      case ThemeStyle.NotificationBadge:
+        return _buildNotificationBadge();
       default:
         return _buildOriginDesign();
     }
   }
 
+  Widget _buildNotificationBadge() {
+    print("notification");
+    return CustomNavigationBar(
+      iconSize: 30.0,
+      selectedColor: Color(0xff040307),
+      strokeColor: Color(0x30040307),
+      unSelectedColor: Color(0xffacacac),
+      backgroundColor: Colors.white,
+      items: [
+        CustomNavigationBarItem(
+          icon: Icons.home,
+          badgeCount: _badgeCounts[0],
+          showBadge: _badgeShows[0],
+        ),
+        CustomNavigationBarItem(
+          icon: Icons.shopping_cart,
+          badgeCount: _badgeCounts[1],
+          showBadge: _badgeShows[1],
+        ),
+        CustomNavigationBarItem(
+          icon: Icons.lightbulb_outline,
+          badgeCount: _badgeCounts[2],
+          showBadge: _badgeShows[2],
+        ),
+        CustomNavigationBarItem(
+          icon: Icons.search,
+          badgeCount: _badgeCounts[3],
+          showBadge: _badgeShows[3],
+        ),
+        CustomNavigationBarItem(
+          icon: Icons.account_circle,
+          badgeCount: _badgeCounts[4],
+          showBadge: _badgeShows[4],
+        ),
+      ],
+      currentIndex: _currentIndex,
+      onTap: (index) {
+        setState(() {
+          _currentIndex = index;
+          _badgeShows[index] = false;
+        });
+      },
+    );
+  }
+
   Widget _buildOriginDesign() {
     return CustomNavigationBar(
-      scaleFactor: 0.1,
       iconSize: 30.0,
       selectedColor: Colors.white,
       strokeColor: Colors.white,
