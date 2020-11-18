@@ -23,37 +23,37 @@ class CustomNavigationBarItem {
   /// the [selectedIcon] must not be null.
   CustomNavigationBarItem(
       {@required this.icon,
-      IconData selectedIcon,
-      this.selectedTitle,
-      this.unSelectedTitle,
+      Widget selectedIcon,
+      this.title,
+      Text selectedTitle,
       this.badgeCount = 0,
-      this.showBadge = true})
-      : selectedIcon = selectedIcon ?? icon;
+      this.showBadge = false})
+      : selectedIcon = selectedIcon ?? icon,
+        selectedTitle = selectedTitle ?? title;
 
   ///
   /// The icon of the item
   /// Typically the icon is an [Icon].
   ///
-  final IconData icon;
+
+  final Widget icon;
 
   /// An alternative icon displayed when this bottom navigation item is
   /// selected.
   ///
   /// If this icon is not provided, the bottom navigation bar will display
   /// [icon] in either state.
-  final IconData selectedIcon;
+  final Widget selectedIcon;
 
   ///
-  /// The title string when item is selected.
+  /// Item title under icon
   ///
-  /// Item will only show [icon] when [selectedTitle] is null.
-  final String selectedTitle;
+  final Widget title;
 
   ///
-  /// The title string when item is unselected.
+  /// Item selected title under icon
   ///
-  /// Item will only show [icon] when [unSelectedTitle] is null.
-  final String unSelectedTitle;
+  final Widget selectedTitle;
 
   /// Notification badge count
   final int badgeCount;

@@ -1,4 +1,10 @@
 
+## [0.6.0] - 2020-11-17
+* Refactor code base.
+* Add support for title in navigation bar.
+* Fix issue[#4](https://github.com/rickywen911/custom_bubble_navigation_bar/issues/8)
+
+
 ## [0.5.0] - 2020-11-03.
 * Add supporting for notification badge.
 
