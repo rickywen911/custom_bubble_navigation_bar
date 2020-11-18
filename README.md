@@ -5,7 +5,9 @@ A custom navigation bar with bubble click effect.<br>
 
 [![pub package](https://img.shields.io/pub/v/custom_navigation_bar)](https://pub.dev/packages/custom_navigation_bar) 
 [![License: MIT](https://img.shields.io/badge/license-MIT-purple.svg)](https://opensource.org/licenses/MIT)
-<a href="https://github.com/rickywen911/custom_bubble_navigation_bar"><img src="https://img.shields.io/github/stars/rickywen911/custom_bubble_navigation_bar.svg?style=flat&logo=github&colorB=deeppink&label=stars" alt="Star on Github"></a>
+<a href="https://github.com/rickywen911/custom_bubble_navigation_bar"><img src="https://img.shields.io/github/stars/rickywen911/custom_bubble_navigation_bar.svg?style=flat&logo=github&label=stars" alt="Star on Github"></a>
+<a href="https://github.com/rickywen911/custom_bubble_navigation_bar"><img src="https://img.shields.io/github/forks/rickywen911/custom_bubble_navigation_bar.svg?style=flat&logo=github&label=fork" alt="Star on Github"></a>
+
 
 ## Overview
 
@@ -17,7 +19,7 @@ Dribbble:<br>
 <img src="https://cdn.dribbble.com/users/2114584/screenshots/7134849/media/96e4a6002a476bad7bd809ac71e28698.gif" width="400">
 
 Implemented:<br>
-<img src="https://raw.githubusercontent.com/rickywen911/custom_bubble_navigation_bar/master/screenshot/screenshot.gif" width="300">
+<img src="https://raw.githubusercontent.com/rickywen911/custom_bubble_navigation_bar/master/screenshot/6.gif" width="300">
 
 ## Gallery
 
@@ -26,36 +28,48 @@ Implemented:<br>
         <tr>
             <td style="text-align: center">
                 <a>
-                    <img src="https://raw.githubusercontent.com/rickywen911/custom_bubble_navigation_bar/master/screenshot/1.png" width="200"/>
+                    <img src="https://raw.githubusercontent.com/rickywen911/custom_bubble_navigation_bar/master/screenshot/1.gif" width="200"/>
                 </a>
             </td>            
             <td style="text-align: center">
                 <a>
-                    <img src="https://raw.githubusercontent.com/rickywen911/custom_bubble_navigation_bar/master/screenshot/2.png" width="200"/>
+                    <img src="https://raw.githubusercontent.com/rickywen911/custom_bubble_navigation_bar/master/screenshot/2.gif" width="200"/>
                 </a>
             </td>  
             <td style="text-align: center">
                 <a>
-                    <img src="https://raw.githubusercontent.com/rickywen911/custom_bubble_navigation_bar/master/screenshot/3.png" width="200"/>
+                    <img src="https://raw.githubusercontent.com/rickywen911/custom_bubble_navigation_bar/master/screenshot/3.gif" width="200"/>
                 </a>
             </td>  
         </tr>
         <tr>
             <td style="text-align: center">
                 <a>
-                    <img src="https://raw.githubusercontent.com/rickywen911/custom_bubble_navigation_bar/master/screenshot/4.png" width="200"/>
+                    <img src="https://raw.githubusercontent.com/rickywen911/custom_bubble_navigation_bar/master/screenshot/4.gif" width="200"/>
                 </a>
             </td>  
             <td style="text-align: center">
                 <a>
-                    <img src="https://raw.githubusercontent.com/rickywen911/custom_bubble_navigation_bar/master/screenshot/5.png" width="200"/>
+                    <img src="https://raw.githubusercontent.com/rickywen911/custom_bubble_navigation_bar/master/screenshot/5.gif" width="200"/>
                 </a>
             </td>  
             <td style="text-align: center">
                 <a>
-                    <img src="https://raw.githubusercontent.com/rickywen911/custom_bubble_navigation_bar/master/screenshot/6.png" width="200"/>
+                    <img src="https://raw.githubusercontent.com/rickywen911/custom_bubble_navigation_bar/master/screenshot/6.gif" width="200"/>
                 </a>
             </td>  
+            <tr>
+            <td style="text-align: center">
+                <a>
+                    <img src="https://raw.githubusercontent.com/rickywen911/custom_bubble_navigation_bar/master/screenshot/7.gif" width="200"/>
+                </a>
+            </td>  
+            <td style="text-align: center">
+                <a>
+                    <img src="https://raw.githubusercontent.com/rickywen911/custom_bubble_navigation_bar/master/screenshot/8.gif" width="200"/>
+                </a>
+            </td>
+        </tr>
         </tr>
     </table>
 </div>
@@ -64,10 +78,53 @@ Implemented:<br>
 Add this to your package's pubspec.yaml file:
 ```yaml
 dependencies:
-  custom_navigation_bar: ^0.5.0
+  custom_navigation_bar: ^0.6.0
 ```
 ## Documentation
-You can customize these attributes in the navigation bar.<br>
+
+### **Attention** 
+**If you update from version under `0.6.0`, there are some breaking changes in the version `0.6.0`. The `icon` in `CustomNavigationBarItem` has changed from `IconData` to `Widget`**.
+
+old version
+```dart
+CustomNavigationBarItem(
+      {@required this.icon,
+      IconData selectedIcon,
+      this.selectedTitle,
+      this.unSelectedTitle,
+      this.badgeCount = 0,
+      this.showBadge = true})
+      : selectedIcon = selectedIcon ?? icon;
+
+  ///
+  /// The icon of the item
+  /// Typically the icon is an [Icon].
+  ///
+  final IconData icon;
+```
+
+new version
+```dart
+CustomNavigationBarItem(
+      {@required this.icon,
+      Widget selectedIcon,
+      this.title,
+      Text selectedTitle,
+      this.badgeCount = 0,
+      this.showBadge = false})
+      : selectedIcon = selectedIcon ?? icon,
+        selectedTitle = selectedTitle ?? title;
+
+  ///
+  /// The icon of the item
+  /// Typically the icon is an [Icon].
+  ///
+
+  final Widget icon;      
+```
+
+
+### You can customize these attributes in the navigation bar.<br>
 
 | Attributes | Type | Description | Default |
 | -------------------- | -------------- | ---------------- | --------------- |
@@ -95,20 +152,21 @@ CustomNavigationBar(
         ...
         items: [
           CustomNavigationBarItem(
-            icon: Icons.home,
-          ),
-          CustomNavigationBarItem(
-            icon: Icons.shopping_cart,
-          ),
-          CustomNavigationBarItem(
-            icon: Icons.lightbulb_outline,
-          ),
-          CustomNavigationBarItem(
-            icon: Icons.search,
-          ),
-          CustomNavigationBarItem(
-            icon: Icons.account_circle,
-          ),
+          icon: Icon(Icons.home),
+          title: Text("hello"),
+        ),
+        CustomNavigationBarItem(
+          icon: Icon(Icons.shopping_cart),
+        ),
+        CustomNavigationBarItem(
+          icon: Icon(Icons.lightbulb_outline),
+        ),
+        CustomNavigationBarItem(
+          icon: Icon(Icons.search),
+        ),
+        CustomNavigationBarItem(
+          icon: Icon(Icons.account_circle),
+        ),
         ],
         ...
       )
@@ -120,27 +178,27 @@ CustomNavigationBar(
         ...
         items: [
         CustomNavigationBarItem(
-          icon: Icons.home,
+          icon: Icon(Icons.home),
           badgeCount: _badgeCounts[0],
           showBadge: _badgeShows[0],
         ),
         CustomNavigationBarItem(
-          icon: Icons.shopping_cart,
+          icon: Icon(Icons.shopping_bag),
           badgeCount: _badgeCounts[1],
           showBadge: _badgeShows[1],
         ),
         CustomNavigationBarItem(
-          icon: Icons.lightbulb_outline,
+          icon: Icon(Icons.lightbulb_outline),
           badgeCount: _badgeCounts[2],
           showBadge: _badgeShows[2],
         ),
         CustomNavigationBarItem(
-          icon: Icons.search,
+          icon: Icon(Icons.search),
           badgeCount: _badgeCounts[3],
           showBadge: _badgeShows[3],
         ),
         CustomNavigationBarItem(
-          icon: Icons.account_circle,
+          icon: Icon(Icons.account_circle),
           badgeCount: _badgeCounts[4],
           showBadge: _badgeShows[4],
         ),
@@ -148,7 +206,48 @@ CustomNavigationBar(
         ...
       )
 ```
+
 To clear a badge, set `showBadge` to `false`
+
+If you want add title under icon, just use like this
+```dart
+CustomNavigationBar(
+      iconSize: 30.0,
+      selectedColor: Color(0xff040307),
+      strokeColor: Color(0x30040307),
+      unSelectedColor: Color(0xffacacac),
+      backgroundColor: Colors.white,
+      items: [
+        CustomNavigationBarItem(
+          icon: Icon(Icons.home),
+          title: Text("Home"),
+        ),
+        CustomNavigationBarItem(
+          icon: Icon(Icons.shopping_cart),
+          title: Text("Cart"),
+        ),
+        CustomNavigationBarItem(
+          icon: Icon(Icons.lightbulb_outline),
+          title: Text("Explore"),
+        ),
+        CustomNavigationBarItem(
+          icon: Icon(Icons.search),
+          title: Text("Search"),
+        ),
+        CustomNavigationBarItem(
+          icon: Icon(Icons.account_circle),
+          title: Text("Me"),
+        ),
+      ],
+      currentIndex: _currentIndex,
+      onTap: (index) {
+        setState(() {
+          _currentIndex = index;
+        });
+      },
+    );
+```
+
 
 
 ## Example
