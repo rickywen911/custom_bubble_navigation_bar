@@ -69,6 +69,11 @@ Implemented:<br>
                     <img src="https://raw.githubusercontent.com/rickywen911/custom_bubble_navigation_bar/master/screenshot/8.gif" width="200"/>
                 </a>
             </td>
+            <td style="text-align: center">
+                <a>
+                    <img src="https://raw.githubusercontent.com/rickywen911/custom_bubble_navigation_bar/master/screenshot/9.gif" width="200"/>
+                </a>
+            </td>
         </tr>
         </tr>
     </table>
@@ -78,7 +83,7 @@ Implemented:<br>
 Add this to your package's pubspec.yaml file:
 ```yaml
 dependencies:
-  custom_navigation_bar: ^0.6.0
+  custom_navigation_bar: lastest version
 ```
 ## Documentation
 
@@ -142,6 +147,8 @@ CustomNavigationBarItem(
 | `scaleCurve`  | `Curve` | animation curve of scale effect | linear |
 | `borderRadius`  | `Radius` | border radius of navigation bar | Radius.zero |
 | `isFloating`  | `bool` | control if CustomNavigationBar is floating | false |
+| `blurEffect`  | `bool` | control if CustomNavigationBar show blur effect | false |
+| `opacity`  | `double` | control CustomNavigationBar blur effect opacity when `blurEffect` is true | 0.8 |
 
 
 **Attention**: If you set ```isFloating``` to  ```true```, I would recommand you to set ```extendBody``` to ```true``` in ```Scaffold``` for a better performance.
@@ -247,7 +254,6 @@ CustomNavigationBar(
       },
     );
 ```
-
 
 
 ## Example
