@@ -43,7 +43,9 @@ class CustomNavigationBar extends StatefulWidget {
       this.strokeColor = Colors.blueAccent,
       this.bubbleCurve = Curves.linear,
       this.scaleCurve = Curves.linear,
-      this.isFloating = false})
+      this.isFloating = false,
+      this.blurEffect = false,
+      this.opacity = 0.8})
       : assert(items != null),
         assert(scaleFactor <= 0.5, 'Scale factor must smaller than 0.5'),
         assert(scaleFactor > 0, 'Scale factor must bigger than 0'),
@@ -122,6 +124,18 @@ class CustomNavigationBar extends StatefulWidget {
   /// animation curve of scale effect
   ///
   final Curve scaleCurve;
+
+  ///
+  /// bool to control if navigation bar use blur effect
+  /// default is [false]
+  ///
+  final bool blurEffect;
+
+  ///
+  /// When [blurEffect] is [true], control the opacity of navigation bar
+  /// default is [0.8]
+  ///
+  final double opacity;
 
   @override
   _CustomNavigationBarState createState() => _CustomNavigationBarState();
@@ -276,48 +290,70 @@ class _CustomNavigationBarState extends State<CustomNavigationBar>
               32) /
           (widget.items.length * 2);
     }
-    return Padding(
-      padding: widget.isFloating
-          ? EdgeInsets.only(
-              left: 16, right: 16, top: 0, bottom: additionalBottomPadding)
-          : EdgeInsets.zero,
-      child: Material(
-        elevation: widget.elevation,
-        borderRadius: BorderRadius.all(
-          widget.borderRadius,
-        ),
-        child: Container(
-          decoration: BoxDecoration(
-            color: widget.backgroundColor,
-            borderRadius: BorderRadius.all(
-              widget.borderRadius,
-            ),
-          ),
-          height: height,
-          width: MediaQuery.of(context).size.width,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              for (var i = 0; i < widget.items.length; i++)
-                GestureDetector(
-                  behavior: HitTestBehavior.opaque,
-                  onTap: () {
-                    widget.onTap(i);
-                  },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      _buildIcon(i),
-                      _buildLabel(i),
-                    ],
-                  ),
+
+    Widget bar = Material(
+      color: widget.backgroundColor,
+      elevation: widget.elevation,
+      borderRadius: BorderRadius.all(
+        widget.borderRadius,
+      ),
+      child: Container(
+        height: height,
+        width: MediaQuery.of(context).size.width,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            for (var i = 0; i < widget.items.length; i++)
+              GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: () {
+                  widget.onTap(i);
+                },
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    _buildIcon(i),
+                    _buildLabel(i),
+                  ],
                 ),
-            ],
-          ),
+              ),
+          ],
         ),
       ),
     );
+
+    if (widget.blurEffect) {
+      return Padding(
+        padding: widget.isFloating
+            ? EdgeInsets.only(
+                left: 16, right: 16, top: 0, bottom: additionalBottomPadding)
+            : EdgeInsets.zero,
+        child: ClipRRect(
+          borderRadius: BorderRadius.all(
+            widget.borderRadius,
+          ),
+          child: BackdropFilter(
+            filter: ImageFilter.blur(
+              sigmaX: 5.0,
+              sigmaY: 10.0,
+            ),
+            child: Opacity(
+              opacity: 0.6,
+              child: bar,
+            ),
+          ),
+        ),
+      );
+    } else {
+      return Padding(
+        padding: widget.isFloating
+            ? EdgeInsets.only(
+                left: 16, right: 16, top: 0, bottom: additionalBottomPadding)
+            : EdgeInsets.zero,
+        child: bar,
+      );
+    }
   }
 }
 

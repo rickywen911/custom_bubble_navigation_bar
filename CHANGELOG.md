@@ -1,5 +1,9 @@
 
-## [0.6.0] - 2020-11-17
+## [0.7.0] - 2021-01-02.
+* Add [blur effect in navigation bar](https://github.com/rickywen911/custom_bubble_navigation_bar/issues/10)
+* Update README
+
+## [0.6.0] - 2020-11-17.
 * Refactor code base.
 * Add support for title in navigation bar.
 * Fix issue[#4](https://github.com/rickywen911/custom_bubble_navigation_bar/issues/8)

@@ -29,7 +29,8 @@ enum ThemeStyle {
   BorderRadius,
   FloatingBar,
   NotificationBadge,
-  WithTitle
+  WithTitle,
+  BlurEffect
 }
 
 class MyApp extends StatelessWidget {
@@ -68,6 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       // extendBody for floating bar get better perfomance
       extendBody: true,
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(widget.title),
       ),
@@ -170,6 +172,18 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
               ),
             ),
+            ListTile(
+              title: const Text('Blur Effect'),
+              leading: Radio(
+                value: ThemeStyle.BlurEffect,
+                groupValue: _currentStyle,
+                onChanged: (ThemeStyle value) {
+                  setState(() {
+                    _currentStyle = value;
+                  });
+                },
+              ),
+            ),
           ],
         ),
       ),
@@ -195,6 +209,8 @@ class _MyHomePageState extends State<MyHomePage> {
         return _buildNotificationBadge();
       case ThemeStyle.WithTitle:
         return _buildTitle();
+      case ThemeStyle.BlurEffect:
+        return _buildBlurEffect();
       default:
         return _buildOriginDesign();
     }
@@ -293,7 +309,6 @@ class _MyHomePageState extends State<MyHomePage> {
       items: [
         CustomNavigationBarItem(
           icon: Icon(Icons.home),
-          title: Text("hello"),
         ),
         CustomNavigationBarItem(
           icon: Icon(Icons.shopping_cart),
@@ -479,6 +494,53 @@ class _MyHomePageState extends State<MyHomePage> {
       unSelectedColor: Colors.grey[600],
       backgroundColor: Colors.white,
       borderRadius: Radius.circular(20.0),
+      items: [
+        CustomNavigationBarItem(
+          icon: Icon(
+            AntDesign.getIconData('home'),
+          ),
+        ),
+        CustomNavigationBarItem(
+          icon: Icon(
+            AntDesign.getIconData('shoppingcart'),
+          ),
+        ),
+        CustomNavigationBarItem(
+          icon: Icon(
+            AntDesign.getIconData("cloudo"),
+          ),
+        ),
+        CustomNavigationBarItem(
+          icon: Icon(
+            AntDesign.getIconData('search1'),
+          ),
+        ),
+        CustomNavigationBarItem(
+          icon: Icon(
+            AntDesign.getIconData("user"),
+          ),
+        ),
+      ],
+      currentIndex: _currentIndex,
+      onTap: (index) {
+        setState(() {
+          _currentIndex = index;
+        });
+      },
+      isFloating: true,
+    );
+  }
+
+  Widget _buildBlurEffect() {
+    return CustomNavigationBar(
+      iconSize: 30.0,
+      selectedColor: Colors.white,
+      strokeColor: Colors.white,
+      unSelectedColor: Colors.grey[600],
+      backgroundColor: Colors.black,
+      borderRadius: Radius.circular(20.0),
+      blurEffect: true,
+      opacity: 0.8,
       items: [
         CustomNavigationBarItem(
           icon: Icon(
