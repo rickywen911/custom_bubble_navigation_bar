@@ -1,3 +1,5 @@
+## [0.7.1] - 2021-01-02.
+* merge pull request [fix selected icon](https://github.com/rickywen911/custom_bubble_navigation_bar/pull/13)
 
 ## [0.7.0] - 2021-01-02.
 * Add [blur effect in navigation bar](https://github.com/rickywen911/custom_bubble_navigation_bar/issues/10)
