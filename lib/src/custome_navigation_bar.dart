@@ -394,7 +394,7 @@ class _CustomNavigationBarTile extends StatelessWidget {
               color: selected ? selectedColor : unSelectedColor,
               size: iconSize,
             ),
-            child: item.icon,
+            child: selected ? item.selectedIcon : item.icon,
           ),
           BadgeText(
             show: item.showBadge,
