@@ -29,8 +29,8 @@ class CustomNavigationBar extends StatefulWidget {
   /// create a [CustomNavigationBar]
   ///
   const CustomNavigationBar(
-      {Key key,
-      @required this.items,
+      {Key? key,
+      required this.items,
       this.selectedColor,
       this.unSelectedColor,
       this.onTap,
@@ -82,18 +82,18 @@ class CustomNavigationBar extends StatefulWidget {
   /// [Color] when [CustomNavigationBarItem] is selected.
   ///
   /// default color is [blueAccent].
-  final Color selectedColor;
+  final Color? selectedColor;
 
   ///
   /// [Color] when [CustomNavigationBarItem] is not selected.
   ///
   /// default color is [grey[600]].
-  final Color unSelectedColor;
+  final Color? unSelectedColor;
 
   ///
   /// callback function when item tapped
   ///
-  final Function(int) onTap;
+  final Function(int)? onTap;
 
   ///
   /// current index of navigation bar.
@@ -143,13 +143,13 @@ class CustomNavigationBar extends StatefulWidget {
 
 class _CustomNavigationBarState extends State<CustomNavigationBar>
     with TickerProviderStateMixin {
-  List<double> _radiuses;
-  List<double> _sizes;
-  AnimationController _controller;
-  AnimationController _scaleController;
+  late List<double> _radiuses;
+  late List<double> _sizes;
+  AnimationController? _controller;
+  late AnimationController _scaleController;
 
   double _bubbleRadius = 0.0;
-  double _maxRadius;
+  double? _maxRadius;
 
   double _itemPadding = 0.0;
 
@@ -170,7 +170,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar>
   @override
   void dispose() {
     if (_controller != null) {
-      _controller.dispose();
+      _controller!.dispose();
     }
     super.dispose();
   }
@@ -190,16 +190,16 @@ class _CustomNavigationBarState extends State<CustomNavigationBar>
       duration: Duration(milliseconds: 300),
     );
     CurvedAnimation _curvedAnimation = CurvedAnimation(
-      parent: _controller,
+      parent: _controller!,
       curve: widget.bubbleCurve,
     );
     Tween<double>(begin: 0.0, end: 1.0).animate(_curvedAnimation)
       ..addListener(() {
         setState(() {
-          _radiuses[index] = _maxRadius * _curvedAnimation.value;
+          _radiuses[index] = _maxRadius! * _curvedAnimation.value;
         });
       });
-    _controller.forward();
+    _controller!.forward();
   }
 
   void _startScale(int index) {
@@ -307,7 +307,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar>
               GestureDetector(
                 behavior: HitTestBehavior.opaque,
                 onTap: () {
-                  widget.onTap(i);
+                  widget.onTap!(i);
                 },
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -359,7 +359,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar>
 
 class _CustomNavigationBarTile extends StatelessWidget {
   const _CustomNavigationBarTile(
-      {Key key,
+      {Key? key,
       this.selected,
       this.item,
       this.selectedColor,
@@ -369,36 +369,36 @@ class _CustomNavigationBarTile extends StatelessWidget {
       this.iconPadding})
       : super(key: key);
 
-  final bool selected;
+  final bool? selected;
 
-  final CustomNavigationBarItem item;
+  final CustomNavigationBarItem? item;
 
-  final Color selectedColor;
+  final Color? selectedColor;
 
-  final Color unSelectedColor;
+  final Color? unSelectedColor;
 
-  final double scale;
+  final double? scale;
 
-  final double iconSize;
+  final double? iconSize;
 
-  final double iconPadding;
+  final double? iconPadding;
 
   @override
   Widget build(BuildContext context) {
     return Transform.scale(
-      scale: 1.0 + scale,
+      scale: 1.0 + scale!,
       child: Stack(
         children: [
           IconTheme(
             data: IconThemeData(
-              color: selected ? selectedColor : unSelectedColor,
+              color: selected! ? selectedColor : unSelectedColor,
               size: iconSize,
             ),
-            child: selected ? item.selectedIcon : item.icon,
+            child: selected! ? item!.selectedIcon : item!.icon,
           ),
           BadgeText(
-            show: item.showBadge,
-            count: item.badgeCount,
+            show: item!.showBadge,
+            count: item!.badgeCount,
             right: 0.0,
           )
         ],
