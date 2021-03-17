@@ -22,10 +22,10 @@ class CustomNavigationBarItem {
   ///
   /// the [selectedIcon] must not be null.
   CustomNavigationBarItem(
-      {@required this.icon,
-      Widget selectedIcon,
+      {required this.icon,
+      Widget? selectedIcon,
       this.title,
-      Text selectedTitle,
+      Text? selectedTitle,
       this.badgeCount = 0,
       this.showBadge = false})
       : selectedIcon = selectedIcon ?? icon,
@@ -48,12 +48,12 @@ class CustomNavigationBarItem {
   ///
   /// Item title under icon
   ///
-  final Widget title;
+  final Widget? title;
 
   ///
   /// Item selected title under icon
   ///
-  final Widget selectedTitle;
+  final Widget? selectedTitle;
 
   /// Notification badge count
   final int badgeCount;

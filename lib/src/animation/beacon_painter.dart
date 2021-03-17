@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class BeaconPainter extends CustomPainter {
-  final double beaconRadius;
-  final Color color;
-  final double maxRadius;
-  final Offset offset;
+  final double? beaconRadius;
+  final Color? color;
+  final double? maxRadius;
+  final Offset? offset;
 
   const BeaconPainter({
     this.beaconRadius,
@@ -17,15 +17,15 @@ class BeaconPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     if (beaconRadius == maxRadius) return;
 
-    if (beaconRadius < maxRadius * 0.5) {
-      final Paint paint = Paint()..color = color;
-      canvas.drawCircle(offset, beaconRadius, paint);
+    if (beaconRadius! < maxRadius! * 0.5) {
+      final Paint paint = Paint()..color = color!;
+      canvas.drawCircle(offset!, beaconRadius!, paint);
     } else {
       final Paint paint = Paint()
-        ..color = color
+        ..color = color!
         ..style = PaintingStyle.stroke
-        ..strokeWidth = maxRadius - beaconRadius;
-      canvas.drawCircle(offset, beaconRadius, paint);
+        ..strokeWidth = maxRadius! - beaconRadius!;
+      canvas.drawCircle(offset!, beaconRadius!, paint);
     }
   }
 
