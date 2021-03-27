@@ -232,7 +232,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar>
       if (widget.items[index].title == null && widget.isFloating) {
         return Container();
       } else {
-        return widget.items[index].title ?? Text('');
+        return widget.items[index].title ?? Container();
       }
     } else {
       //selected
