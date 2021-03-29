@@ -232,14 +232,14 @@ class _CustomNavigationBarState extends State<CustomNavigationBar>
       if (widget.items[index].title == null && widget.isFloating) {
         return Container();
       } else {
-        return widget.items[index].title ?? Text('');
+        return widget.items[index].title ?? Container();
       }
     } else {
       //selected
       if (widget.isFloating && widget.items[index].title == null) {
         return Container();
       } else {
-        return widget.items[index].selectedTitle ?? Text('');
+        return widget.items[index].selectedTitle ?? Container();
       }
     }
   }
@@ -301,21 +301,23 @@ class _CustomNavigationBarState extends State<CustomNavigationBar>
         height: height,
         width: MediaQuery.of(context).size.width,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             for (var i = 0; i < widget.items.length; i++)
-              GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                onTap: () {
-                  widget.onTap!(i);
-                },
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    _buildIcon(i),
-                    _buildLabel(i),
-                  ],
+              Expanded(
+                child: GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: () {
+                    widget.onTap!(i);
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      _buildIcon(i),
+                      _buildLabel(i),
+                    ],
+                  ),
                 ),
               ),
           ],
