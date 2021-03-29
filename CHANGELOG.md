@@ -1,3 +1,6 @@
+## [0.8.1] - 2021-03-29.
+* fix [bug](https://github.com/rickywen911/custom_bubble_navigation_bar/issues/17)
+
 ## [0.8.0] - 2021-03-17.
 * merge pull request [null safety support](https://github.com/rickywen911/custom_bubble_navigation_bar/pull/19)
 * pump Flutter to 2.0.2
