@@ -1,3 +1,7 @@
+
+## [0.7.2] - 2021-06-13.
+* fix issue [animation bugs](https://github.com/rickywen911/custom_bubble_navigation_bar/issues/21)
+
 ## [0.7.1] - 2021-01-02.
 * merge pull request [fix selected icon](https://github.com/rickywen911/custom_bubble_navigation_bar/pull/13)
 
