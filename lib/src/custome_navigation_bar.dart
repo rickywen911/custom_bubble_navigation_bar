@@ -146,7 +146,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar>
   late List<double> _radiuses;
   late List<double> _sizes;
   AnimationController? _controller;
-  late AnimationController _scaleController;
+  AnimationController? _scaleController;
 
   double _bubbleRadius = 0.0;
   double? _maxRadius;
@@ -179,6 +179,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar>
   void didUpdateWidget(CustomNavigationBar oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.currentIndex != oldWidget.currentIndex) {
+      _scaleController?.reverse();
       _startAnimation(widget.currentIndex);
       _startScale(widget.currentIndex);
     }
@@ -208,11 +209,11 @@ class _CustomNavigationBarState extends State<CustomNavigationBar>
       duration: Duration(milliseconds: 400),
     )..addStatusListener((status) {
         if (status == AnimationStatus.completed) {
-          _scaleController.reverse();
+          _scaleController?.reverse();
         }
       });
     CurvedAnimation _scaleAnimation = CurvedAnimation(
-      parent: _scaleController,
+      parent: _scaleController!,
       curve: widget.scaleCurve,
       reverseCurve: widget.scaleCurve.flipped,
     );
@@ -223,7 +224,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar>
           _sizes[index] = _scaleAnimation.value * widget.scaleFactor;
         });
       });
-    _scaleController.forward();
+    _scaleController!.forward();
   }
 
   Widget _buildLabel(int index) {

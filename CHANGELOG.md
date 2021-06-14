@@ -1,9 +1,15 @@
+
+
+## [0.8.2] - 2021-06-13.
+* fix issue [animation bugs](https://github.com/rickywen911/custom_bubble_navigation_bar/issues/21)
+
 ## [0.8.1] - 2021-03-29.
 * fix [bug](https://github.com/rickywen911/custom_bubble_navigation_bar/issues/17)
 
 ## [0.8.0] - 2021-03-17.
 * merge pull request [null safety support](https://github.com/rickywen911/custom_bubble_navigation_bar/pull/19)
 * pump Flutter to 2.0.2
+
 
 ## [0.7.1] - 2021-01-02.
 * merge pull request [fix selected icon](https://github.com/rickywen911/custom_bubble_navigation_bar/pull/13)
