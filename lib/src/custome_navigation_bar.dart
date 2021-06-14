@@ -179,6 +179,9 @@ class _CustomNavigationBarState extends State<CustomNavigationBar>
   void didUpdateWidget(CustomNavigationBar oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.currentIndex != oldWidget.currentIndex) {
+      if (_scaleController != null && _scaleController.isAnimating) {
+        _scaleController.reverse();
+      }
       _startAnimation(widget.currentIndex);
       _startScale(widget.currentIndex);
     }
