@@ -15,42 +15,53 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import 'dart:math' as math;
 import 'dart:ui';
 
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:custom_navigation_bar/src/animation/beacon_painter.dart';
 import 'package:custom_navigation_bar/src/util/badge_text.dart';
+import 'package:custom_navigation_bar/src/util/default_style.dart';
 import 'package:flutter/material.dart';
-import 'util/default_style.dart';
-import 'dart:math' as math;
 
 class CustomNavigationBar extends StatefulWidget {
   ///
   /// create a [CustomNavigationBar]
   ///
-  const CustomNavigationBar(
-      {Key? key,
-      required this.items,
-      this.selectedColor,
-      this.unSelectedColor,
-      this.onTap,
-      this.currentIndex = 0,
-      this.iconSize = 24.0,
-      this.scaleFactor = 0.2,
-      this.elevation = 8.0,
-      this.borderRadius = Radius.zero,
-      this.backgroundColor = Colors.white,
-      this.strokeColor = Colors.blueAccent,
-      this.bubbleCurve = Curves.linear,
-      this.scaleCurve = Curves.linear,
-      this.isFloating = false,
-      this.blurEffect = false,
-      this.opacity = 0.8})
-      : assert(items != null),
-        assert(scaleFactor <= 0.5, 'Scale factor must smaller than 0.5'),
+  const CustomNavigationBar({
+    Key? key,
+    required this.items,
+    this.duration = const Duration(milliseconds: 300),
+    this.scaleDuration = const Duration(milliseconds: 400),
+    this.selectedColor,
+    this.unSelectedColor,
+    this.onTap,
+    this.currentIndex = 0,
+    this.iconSize = 24.0,
+    this.scaleFactor = 0.2,
+    this.elevation = 8.0,
+    this.borderRadius = Radius.zero,
+    this.backgroundColor = Colors.white,
+    this.strokeColor = Colors.blueAccent,
+    this.bubbleCurve = Curves.linear,
+    this.scaleCurve = Curves.linear,
+    this.isFloating = false,
+    this.blurEffect = false,
+    this.opacity = 0.8,
+  })  : assert(scaleFactor <= 0.5, 'Scale factor must smaller than 0.5'),
         assert(scaleFactor > 0, 'Scale factor must bigger than 0'),
         assert(0 <= currentIndex && currentIndex < items.length),
         super(key: key);
+
+  ///
+  /// Animation duration
+  ///
+  final Duration duration;
+
+  ///
+  /// Scale duration
+  ///
+  final Duration scaleDuration;
 
   ///
   /// scale factor for the icon scale animation effect.
@@ -64,7 +75,7 @@ class CustomNavigationBar extends StatefulWidget {
   final bool isFloating;
 
   ///
-  /// Border radius for naviagtion bar
+  /// Border radius for navigation bar
   ///
   final Radius borderRadius;
 
@@ -169,9 +180,8 @@ class _CustomNavigationBarState extends State<CustomNavigationBar>
 
   @override
   void dispose() {
-    if (_controller != null) {
-      _controller!.dispose();
-    }
+    _controller?.dispose();
+
     super.dispose();
   }
 
@@ -188,42 +198,44 @@ class _CustomNavigationBarState extends State<CustomNavigationBar>
   void _startAnimation(int index) {
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 300),
+      duration: widget.duration,
     );
-    CurvedAnimation _curvedAnimation = CurvedAnimation(
+    final CurvedAnimation _curvedAnimation = CurvedAnimation(
       parent: _controller!,
       curve: widget.bubbleCurve,
     );
-    Tween<double>(begin: 0.0, end: 1.0).animate(_curvedAnimation)
-      ..addListener(() {
-        setState(() {
-          _radiuses[index] = _maxRadius! * _curvedAnimation.value;
-        });
+    Tween<double>(begin: 0.0, end: 1.0)
+        .animate(_curvedAnimation)
+        .addListener(() {
+      setState(() {
+        _radiuses[index] = _maxRadius! * _curvedAnimation.value;
       });
+    });
     _controller!.forward();
   }
 
   void _startScale(int index) {
     _scaleController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 400),
+      duration: widget.scaleDuration,
     )..addStatusListener((status) {
         if (status == AnimationStatus.completed) {
           _scaleController?.reverse();
         }
       });
-    CurvedAnimation _scaleAnimation = CurvedAnimation(
+    final _scaleAnimation = CurvedAnimation(
       parent: _scaleController!,
       curve: widget.scaleCurve,
       reverseCurve: widget.scaleCurve.flipped,
     );
 
-    Tween<double>(begin: 0.0, end: 1.0).animate(_scaleAnimation)
-      ..addListener(() {
-        setState(() {
-          _sizes[index] = _scaleAnimation.value * widget.scaleFactor;
-        });
+    Tween<double>(begin: 0.0, end: 1.0)
+        .animate(_scaleAnimation)
+        .addListener(() {
+      setState(() {
+        _sizes[index] = _scaleAnimation.value * widget.scaleFactor;
       });
+    });
     _scaleController!.forward();
   }
 
@@ -251,13 +263,14 @@ class _CustomNavigationBarState extends State<CustomNavigationBar>
       width: widget.iconSize,
       child: CustomPaint(
         painter: BeaconPainter(
-            color: widget.strokeColor,
-            beaconRadius: _radiuses[index],
-            maxRadius: _maxRadius,
-            offset: Offset(
-              widget.iconSize / 2,
-              widget.iconSize / 2,
-            )),
+          color: widget.strokeColor,
+          beaconRadius: _radiuses[index],
+          maxRadius: _maxRadius,
+          offset: Offset(
+            widget.iconSize / 2,
+            widget.iconSize / 2,
+          ),
+        ),
         child: _CustomNavigationBarTile(
           iconSize: widget.iconSize,
           scale: _sizes[index],
@@ -292,13 +305,13 @@ class _CustomNavigationBarState extends State<CustomNavigationBar>
           (widget.items.length * 2);
     }
 
-    Widget bar = Material(
+    final bar = Material(
       color: widget.backgroundColor,
       elevation: widget.elevation,
       borderRadius: BorderRadius.all(
         widget.borderRadius,
       ),
-      child: Container(
+      child: SizedBox(
         height: height,
         width: MediaQuery.of(context).size.width,
         child: Row(
@@ -313,7 +326,6 @@ class _CustomNavigationBarState extends State<CustomNavigationBar>
                   },
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       _buildIcon(i),
                       _buildLabel(i),
@@ -330,7 +342,10 @@ class _CustomNavigationBarState extends State<CustomNavigationBar>
       return Padding(
         padding: widget.isFloating
             ? EdgeInsets.only(
-                left: 16, right: 16, top: 0, bottom: additionalBottomPadding)
+                left: 16,
+                right: 16,
+                bottom: additionalBottomPadding,
+              )
             : EdgeInsets.zero,
         child: ClipRRect(
           borderRadius: BorderRadius.all(
@@ -352,7 +367,10 @@ class _CustomNavigationBarState extends State<CustomNavigationBar>
       return Padding(
         padding: widget.isFloating
             ? EdgeInsets.only(
-                left: 16, right: 16, top: 0, bottom: additionalBottomPadding)
+                left: 16,
+                right: 16,
+                bottom: additionalBottomPadding,
+              )
             : EdgeInsets.zero,
         child: bar,
       );
@@ -361,16 +379,16 @@ class _CustomNavigationBarState extends State<CustomNavigationBar>
 }
 
 class _CustomNavigationBarTile extends StatelessWidget {
-  const _CustomNavigationBarTile(
-      {Key? key,
-      this.selected,
-      this.item,
-      this.selectedColor,
-      this.unSelectedColor,
-      this.scale,
-      this.iconSize,
-      this.iconPadding})
-      : super(key: key);
+  const _CustomNavigationBarTile({
+    Key? key,
+    this.selected,
+    this.item,
+    this.selectedColor,
+    this.unSelectedColor,
+    this.scale,
+    this.iconSize,
+    this.iconPadding,
+  }) : super(key: key);
 
   final bool? selected;
 

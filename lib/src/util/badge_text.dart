@@ -23,18 +23,18 @@ class BadgeText extends StatelessWidget {
       top: 0,
       child: show!
           ? Container(
-              padding: EdgeInsets.all(2),
-              decoration: new BoxDecoration(
+              padding: const EdgeInsets.all(2),
+              decoration: BoxDecoration(
                 color: Colors.red,
                 borderRadius: BorderRadius.circular(6),
               ),
-              constraints: BoxConstraints(
+              constraints: const BoxConstraints(
                 minWidth: 12,
                 minHeight: 12,
               ),
               child: Text(
                 count! > 10 ? '10+' : '$count',
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 6,
                 ),

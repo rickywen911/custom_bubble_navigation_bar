@@ -21,14 +21,14 @@ class CustomNavigationBarItem {
   /// Create a Custom Navigationbar Item.
   ///
   /// the [selectedIcon] must not be null.
-  CustomNavigationBarItem(
-      {required this.icon,
-      Widget? selectedIcon,
-      this.title,
-      Text? selectedTitle,
-      this.badgeCount = 0,
-      this.showBadge = false})
-      : selectedIcon = selectedIcon ?? icon,
+  CustomNavigationBarItem({
+    required this.icon,
+    Widget? selectedIcon,
+    this.title,
+    Text? selectedTitle,
+    this.badgeCount = 0,
+    this.showBadge = false,
+  })  : selectedIcon = selectedIcon ?? icon,
         selectedTitle = selectedTitle ?? title;
 
   ///
