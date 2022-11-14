@@ -181,6 +181,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar>
   @override
   void dispose() {
     _controller?.dispose();
+    _scaleController?.dispose();
 
     super.dispose();
   }
