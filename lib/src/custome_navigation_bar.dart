@@ -20,8 +20,8 @@ import 'dart:ui';
 
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:custom_navigation_bar/src/animation/beacon_painter.dart';
+import 'package:custom_navigation_bar/src/style/default_style.dart';
 import 'package:custom_navigation_bar/src/util/badge_text.dart';
-import 'package:custom_navigation_bar/src/util/default_style.dart';
 import 'package:flutter/material.dart';
 
 class CustomNavigationBar extends StatefulWidget {
@@ -33,16 +33,19 @@ class CustomNavigationBar extends StatefulWidget {
     required this.items,
     this.duration = const Duration(milliseconds: 300),
     this.scaleDuration = const Duration(milliseconds: 400),
-    this.selectedColor,
-    this.unSelectedColor,
     this.onTap,
     this.currentIndex = 0,
     this.iconSize = 24.0,
     this.scaleFactor = 0.2,
     this.elevation = 8.0,
     this.borderRadius = Radius.zero,
+    this.selectedColor,
+    this.unSelectedColor,
     this.backgroundColor = Colors.white,
     this.strokeColor = Colors.blueAccent,
+    this.brightness,
+    this.lightThemeData,
+    this.darkThemeData,
     this.bubbleCurve = Curves.linear,
     this.scaleCurve = Curves.linear,
     this.isFloating = false,
@@ -147,6 +150,14 @@ class CustomNavigationBar extends StatefulWidget {
   /// default is [0.8]
   ///
   final double opacity;
+
+  /// describes the contrast of a theme or color palette.
+  /// If you want adaptive system display setting like iOS dark mode ,
+  /// you should set [Brightness.dark] or [Brightness.light] .
+  final Brightness? brightness;
+
+  final CustomNavigationBarThemeData? lightThemeData;
+  final CustomNavigationBarThemeData? darkThemeData;
 
   @override
   _CustomNavigationBarState createState() => _CustomNavigationBarState();
@@ -258,13 +269,41 @@ class _CustomNavigationBarState extends State<CustomNavigationBar>
     }
   }
 
+  CustomNavigationBarThemeData _calculateThemeData() {
+    final Brightness? brightness = widget.brightness;
+    if (brightness == null) {
+      return CustomNavigationBarThemeData.light.merge(
+        themeData: CustomNavigationBarThemeData(
+          backgroundColor: widget.backgroundColor,
+          strokeColor: widget.strokeColor,
+          selectedColor: widget.selectedColor,
+          unSelectedColor: widget.unSelectedColor,
+        ),
+      );
+    }
+    switch (brightness) {
+      case Brightness.dark:
+        return CustomNavigationBarThemeData.dark
+            .merge(themeData: widget.darkThemeData);
+      default:
+        // Brightness.light
+        return CustomNavigationBarThemeData.light
+            .merge(themeData: widget.lightThemeData);
+    }
+  }
+
   Widget _buildIcon(int index) {
+    final CustomNavigationBarThemeData themeData = _calculateThemeData();
+    final Color? unSelectedColor = themeData.unSelectedColor;
+    final Color? selectedColor = themeData.selectedColor;
+    final Color? strokeColor = themeData.strokeColor;
+
     return SizedBox(
       height: widget.iconSize,
       width: widget.iconSize,
       child: CustomPaint(
         painter: BeaconPainter(
-          color: widget.strokeColor,
+          color: strokeColor,
           beaconRadius: _radiuses[index],
           maxRadius: _maxRadius,
           offset: Offset(
@@ -277,10 +316,8 @@ class _CustomNavigationBarState extends State<CustomNavigationBar>
           scale: _sizes[index],
           selected: index == widget.currentIndex,
           item: widget.items[index],
-          selectedColor: widget.selectedColor ??
-              DefaultCustomNavigationBarStyle.defaultColor,
-          unSelectedColor: widget.unSelectedColor ??
-              DefaultCustomNavigationBarStyle.defaultUnselectedColor,
+          selectedColor: selectedColor,
+          unSelectedColor: unSelectedColor,
           iconPadding: _itemPadding,
         ),
       ),
@@ -306,8 +343,11 @@ class _CustomNavigationBarState extends State<CustomNavigationBar>
           (widget.items.length * 2);
     }
 
+    final CustomNavigationBarThemeData themeData = _calculateThemeData();
+    final Color? backgroundColor = themeData.backgroundColor;
+
     final bar = Material(
-      color: widget.backgroundColor,
+      color: backgroundColor,
       elevation: widget.elevation,
       borderRadius: BorderRadius.all(
         widget.borderRadius,
