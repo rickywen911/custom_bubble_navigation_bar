@@ -298,8 +298,6 @@ class _CustomNavigationBarState extends State<CustomNavigationBar>
     final Color? selectedColor = themeData.selectedColor;
     final Color? strokeColor = themeData.strokeColor;
 
-    print("selectedColor:$selectedColor");
-
     return SizedBox(
       height: widget.iconSize,
       width: widget.iconSize,
@@ -347,8 +345,6 @@ class _CustomNavigationBarState extends State<CustomNavigationBar>
 
     final CustomNavigationBarThemeData themeData = _calculateThemeData();
     final Color? backgroundColor = themeData.backgroundColor;
-
-    print("backgroundColor:$backgroundColor");
 
     final bar = Material(
       color: backgroundColor,
