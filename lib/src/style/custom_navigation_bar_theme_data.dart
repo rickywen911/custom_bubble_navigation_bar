@@ -15,7 +15,7 @@ class CustomNavigationBarThemeData {
   });
 
   static final CustomNavigationBarThemeData _dark = CustomNavigationBarThemeData(
-    backgroundColor: Colors.black,
+    backgroundColor: const Color.fromARGB(0xFF, 0x1E, 0x1E, 0x1E),
     strokeColor: Colors.white,
     selectedColor: Colors.white,
     unSelectedColor: DefaultCustomNavigationBarStyle.defaultUnselectedColor,
